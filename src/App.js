@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import imageUrlBuilder from '@sanity/image-url'
-import Header from './Components/Header'
+// import Header from './Components/Header'
 
 const sanityClient = require('@sanity/client')
 const client = sanityClient({
@@ -23,27 +23,19 @@ class App extends Component {
   super(props)
   this.state = {
     footer: {
-      _id: '',
-      name: '',
-      companyInfo: '',
-      image: ''
+
     },
     header: {
-      _id: '',
-      logo: '',
-      menu: [],
-      phone: ''
-    }
+
+    },
+   videosArray : [
+   ],
+   isLoading: true
   }
 }
 
   componentDidMount() {
-    const footerQuery = `*[_type == "footer"] {
-      _id,
-      name,
-      companyInfo,
-      image,
-    }`
+    const footerQuery = `*[_type == "footer"] `
     client.fetch(footerQuery).then(footer => {
 
       footer.forEach(footer => {
@@ -52,12 +44,7 @@ class App extends Component {
         })
       })
     })
-    const headerQuery = `*[_type == "header"] {
-      _id,
-      logo,
-      menu,
-      phone,
-    }`
+    const headerQuery = `*[_type == "header"] `
     client.fetch(headerQuery).then(header => {
 
       header.forEach(header => {
@@ -66,6 +53,15 @@ class App extends Component {
         })
       })
     })
+    const videoQuery = `*[_type == "video"]`
+    client.fetch(videoQuery).then(video => {
+
+      video.forEach(video => {
+          this.state.videosArray.push(video)
+      })
+        this.setState({isLoading: false})
+    })
+
   }
 
 
@@ -73,14 +69,33 @@ class App extends Component {
 
 
   render() {
-      let { footer, header } = this.state;
-    return (
-      <div className="App">
-        <p>{footer.companyInfo}</p>
-        <p>{header.phone}</p>
-        <img src={urlFor(header.logo).width(500).url()}/>
-      </div>
-    )
+
+      let { footer, header, videosArray } = this.state;
+      const videos = (
+        <div>
+          {videosArray.map((video, _id) => {
+            return (
+              <div key={_id}>
+                <h3>{video.title}</h3>
+                  <iframe title={video.title} src={video.vimeoLink}/>
+                  <p>{video.description}</p>
+              </div>
+
+            )
+          })}
+        </div>
+      )
+      return (
+        this.state.isLoading ? <div className="App"><p>Loading</p></div> : <div className="App">
+          <p>{footer.companyInfo}</p>
+          <p>{header.phone}</p>
+          <img alt="Logo" src={urlFor(header.logo).width(500).url()}/>
+          {videos}
+        </div> )
+
+
+
+
   }
 }
 
