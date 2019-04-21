@@ -4,19 +4,19 @@ import sanityClient from './Client'
 import Header from './Components/Header'
 
 
-
-
-
 class App extends Component {
 
   constructor(props) {
   super(props)
   this.state = {
     footer: {
-
+      companyInfo: ''
     },
     header: {
-
+      menu: [],
+      logo: '',
+      phone: '',
+      email: ''
     },
    videosArray : [
    ],
@@ -47,15 +47,13 @@ class App extends Component {
     sanityClient.fetch(videoQuery).then(video => {
 
       video.forEach(video => {
+          console.log(video.client[0])
           this.state.videosArray.push(video)
       })
         this.setState({isLoading: false})
     })
 
   }
-
-
-
 
 
   render() {
@@ -75,6 +73,7 @@ class App extends Component {
           })}
         </div>
       )
+
       return (
         this.state.isLoading ? <div className="App"><p>Loading</p></div> : <div className="App">
         <Header menu={header.menu} logo={header.logo} email={header.email} phone={header.phone}/>
