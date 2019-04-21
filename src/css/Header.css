@@ -1,0 +1,33 @@
+.contact {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  text-align: left;
+  display: flex;
+  flex-flow: wrap column;
+}
+.contact a {
+  margin-top: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+img {
+  width: 300px;
+  height: auto;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  width: 100%;
+  padding: 0;
+}
+li a {
+  text-decoration: none;
+  color: black;
+  margin: 10px;
+  padding: 10px;
+}
