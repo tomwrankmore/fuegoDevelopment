@@ -49,24 +49,6 @@ class App extends Component {
       })
     })
 
-    const clientQuery = `*[_type == "client"]`
-    sanityClient.fetch(clientQuery).then(client => {
-
-      client.forEach(client => {
-
-          this.state.client.push(client)
-      })
-
-    })
-    const teamQuery = `*[_type == "teamMember"]`
-    sanityClient.fetch(teamQuery).then(team => {
-
-      team.forEach(team => {
-
-          this.state.team.push(team)
-      })
-
-    })
       this.setState({isLoading: false})
 
   }
@@ -81,7 +63,7 @@ class App extends Component {
         this.state.isLoading ? <div className="App"><p>Loading</p></div> : <div className="App">
         <Header menu={header.menu} logo={header.logo} email={header.email} phone={header.phone}/>
           <p>{footer.companyInfo}</p>
-        <Video isLoaded={this.state.isLoaded} client={client} />
+        <Video isLoaded={this.state.isLoaded} />
         </div> )
 
 
