@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import sanityClient from './Client'
 import Header from './Components/Header'
-
+import Video from './Components/Video'
 
 class App extends Component {
 
@@ -18,7 +18,7 @@ class App extends Component {
       phone: '',
       email: ''
     },
-   videosArray : [
+   videoArray : [
    ],
    isLoading: true
   }
@@ -48,7 +48,7 @@ class App extends Component {
 
       video.forEach(video => {
           console.log(video.client[0])
-          this.state.videosArray.push(video)
+          this.state.videoArray.push(video)
       })
         this.setState({isLoading: false})
     })
@@ -58,27 +58,14 @@ class App extends Component {
 
   render() {
 
-      let { footer, header, videosArray } = this.state;
-      const videos = (
-        <div>
-          {videosArray.map((video, _id) => {
-            return (
-              <div key={_id}>
-                <h3>{video.title}</h3>
-                  <iframe title={video.title} src={video.vimeoLink}/>
-                  <p>{video.description}</p>
-              </div>
+      let { footer, header, videoArray } = this.state;
 
-            )
-          })}
-        </div>
-      )
 
       return (
         this.state.isLoading ? <div className="App"><p>Loading</p></div> : <div className="App">
         <Header menu={header.menu} logo={header.logo} email={header.email} phone={header.phone}/>
           <p>{footer.companyInfo}</p>
-          {videos}
+        <Video videoArray={videoArray}/>
         </div> )
 
 
