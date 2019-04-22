@@ -34,7 +34,6 @@ sanityClient.fetch(videoQuery).then(video => {
       loaded && !this.props.isLoaded ? <div className="videoContainer">
 
             {videoArray.map((video, id) => {
-              console.log(videoArray)
               return (
                 <div key={id} className="video">
                   <h3>{video.title}</h3>

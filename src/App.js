@@ -56,7 +56,7 @@ class App extends Component {
 
   render() {
 
-      let { footer, header, client} = this.state;
+      let { footer, header} = this.state;
 
 
       return (
