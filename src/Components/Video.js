@@ -1,24 +1,58 @@
-import React from 'react';
+import React, {Component} from 'react';
 import sanityClient from '../Client';
 import '../css/Video.css'
 
+class Video extends Component {
+  constructor(props) {
+  super(props)
+  this.state = {
+   videoArray : [
+   ],
+   loaded: false
+  }
+}
+componentDidMount() {
 
-const Video = ({videoArray}) => {
+const videoQuery = `*[_type == "video"]{vimeoLink, title, date, client[0...100]->, teamMembers[0...100]->
+}
+`
+sanityClient.fetch(videoQuery).then(video => {
 
-  return (
-    <div className="videoContainer">
-          {videoArray.map((video, _id) => {
-            return (
-              <div className="video">
-                <h3>{video.title}</h3>
-                <p>{`client: ${JSON.stringify(video.client)}`}</p>
-                <iframe title={_id} src={video.vimeoLink}></iframe>
-              </div>
-            )
-          })}
+  video.forEach(video => {
 
-    </div>
-  )
+      this.state.videoArray.push(video)
+
+  })
+  this.setState({loaded: true})
+})
+}
+
+    render(){
+      let { videoArray, loaded} = this.state;
+    return (
+
+      loaded && !this.props.isLoaded ? <div className="videoContainer">
+
+            {videoArray.map((video, id) => {
+              console.log(videoArray)
+              return (
+                <div key={id} className="video">
+                  <h3>{video.title}</h3>
+                    <p>{`team:${video.client.map((client, id) => {
+                        return ' ' + client.clientName
+                      })}`}</p>
+                  <iframe title={id} src={video.vimeoLink}></iframe>
+                  <p>{`team:${video.teamMembers.map((teamMember, id) => {
+                      return ' ' + teamMember.name
+                    })}`}</p>
+                </div>
+              )
+            })}
+
+      </div> : <p>loading</p>
+    )
+  }
+
 }
 
 

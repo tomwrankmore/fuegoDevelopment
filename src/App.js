@@ -18,13 +18,18 @@ class App extends Component {
       phone: '',
       email: ''
     },
-   videoArray : [
+   client : [
+
+   ],
+   team : [
+
    ],
    isLoading: true
   }
 }
 
   componentDidMount() {
+
     const footerQuery = `*[_type == "footer"] `
     sanityClient.fetch(footerQuery).then(footer => {
 
@@ -43,29 +48,40 @@ class App extends Component {
         })
       })
     })
-    const videoQuery = `*[_type == "video"]`
-    sanityClient.fetch(videoQuery).then(video => {
 
-      video.forEach(video => {
-          console.log(video.client[0])
-          this.state.videoArray.push(video)
+    const clientQuery = `*[_type == "client"]`
+    sanityClient.fetch(clientQuery).then(client => {
+
+      client.forEach(client => {
+
+          this.state.client.push(client)
       })
-        this.setState({isLoading: false})
+
     })
+    const teamQuery = `*[_type == "teamMember"]`
+    sanityClient.fetch(teamQuery).then(team => {
+
+      team.forEach(team => {
+
+          this.state.team.push(team)
+      })
+
+    })
+      this.setState({isLoading: false})
 
   }
 
 
   render() {
 
-      let { footer, header, videoArray } = this.state;
+      let { footer, header, client} = this.state;
 
 
       return (
         this.state.isLoading ? <div className="App"><p>Loading</p></div> : <div className="App">
         <Header menu={header.menu} logo={header.logo} email={header.email} phone={header.phone}/>
           <p>{footer.companyInfo}</p>
-        <Video videoArray={videoArray}/>
+        <Video isLoaded={this.state.isLoaded} client={client} />
         </div> )
 
 
