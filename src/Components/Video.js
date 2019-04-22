@@ -38,7 +38,7 @@ sanityClient.fetch(videoQuery).then(video => {
               return (
                 <div key={id} className="video">
                   <h3>{video.title}</h3>
-                    <p>{`team:${video.client.map((client, id) => {
+                    <p>{`client:${video.client.map((client, id) => {
                         return ' ' + client.clientName
                       })}`}</p>
                   <iframe title={id} src={video.vimeoLink}></iframe>
