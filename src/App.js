@@ -74,14 +74,14 @@ class App extends Component {
 
   render() {
 
-      let { footer, header, videoArray, client, team } = this.state;
+      let { footer, header, client} = this.state;
 
 
       return (
         this.state.isLoading ? <div className="App"><p>Loading</p></div> : <div className="App">
         <Header menu={header.menu} logo={header.logo} email={header.email} phone={header.phone}/>
           <p>{footer.companyInfo}</p>
-        <Video />
+        <Video isLoaded={this.state.isLoaded} client={client} />
         </div> )
 
 

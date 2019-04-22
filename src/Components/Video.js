@@ -13,7 +13,9 @@ class Video extends Component {
 }
 componentDidMount() {
 
-const videoQuery = `*[_type == "video"]`
+const videoQuery = `*[_type == "video"]{vimeoLink, title, date, client[0...100]->, teamMembers[0...100]->
+}
+`
 sanityClient.fetch(videoQuery).then(video => {
 
   video.forEach(video => {
@@ -28,14 +30,21 @@ sanityClient.fetch(videoQuery).then(video => {
     render(){
       let { videoArray, loaded} = this.state;
     return (
-      loaded ? <div className="videoContainer">
-            {videoArray.map((video, _id) => {
+
+      loaded && !this.props.isLoaded ? <div className="videoContainer">
+
+            {videoArray.map((video, id) => {
               console.log(videoArray)
               return (
-                <div key={_id} className="video">
+                <div key={id} className="video">
                   <h3>{video.title}</h3>
-
-                  <iframe title={_id} src={video.vimeoLink}></iframe>
+                    <p>{`team:${video.client.map((client, id) => {
+                        return ' ' + client.clientName
+                      })}`}</p>
+                  <iframe title={id} src={video.vimeoLink}></iframe>
+                  <p>{`team:${video.teamMembers.map((teamMember, id) => {
+                      return ' ' + teamMember.name
+                    })}`}</p>
                 </div>
               )
             })}
