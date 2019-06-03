@@ -1,0 +1,8 @@
+.showreel {
+  width: 100%;
+  height: 100vh;
+}
+.showreel iframe {
+  width: 100%;
+  height: 100%;
+}

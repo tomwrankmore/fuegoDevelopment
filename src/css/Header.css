@@ -13,10 +13,13 @@
 }
 .header {
   width: 100%;
+  background: white;
+  z-index: 10;
   top: 0;
   left: 0;
-  position: relative;
-  height: 80px;
+  position: fixed;
+  height: 120px;
+  margin-bottom: 20px;
   display: grid;
   justify-items: center;
   align-items: center;

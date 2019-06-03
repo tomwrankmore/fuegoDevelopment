@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import sanityClient from './Client'
-import Header from './Components/Header'
-import Video from './Components/Video'
+import sanityClient from './Client';
+import Header from './Components/Header';
+import Video from './Components/Video';
+import Showreel from './Components/Showreel'
 
 class App extends Component {
 
@@ -27,9 +28,11 @@ class App extends Component {
    footerLoading: true,
    headerLoading: true,
    videoLoading: true,
+   showreelLoading: true,
    videoArray: [
 
    ],
+   showreel: [],
    isOpen: false
   }
 }
@@ -48,7 +51,20 @@ class App extends Component {
         footerLoading: false
       })
     })
-    const headerQuery = `*[_type == "header"] `
+    const showQuery = `*[_type == "showreel"] `
+    sanityClient.fetch(showQuery).then(showreel => {
+
+      showreel.forEach(showreel => {
+        this.setState({
+          showreel: showreel
+        })
+      })
+      this.setState({
+        showreelLoading: false
+      })
+
+    })
+    const headerQuery = `*[_type == "header"]`
     sanityClient.fetch(headerQuery).then(header => {
 
       header.forEach(header => {
@@ -80,17 +96,18 @@ class App extends Component {
 
   render() {
 
-      let { footer, header, headerLoading, footerLoading, videoLoading, videoArray, isOpen} = this.state;
+      let { footer, header, headerLoading, footerLoading, videoLoading, showreelLoading, videoArray, isOpen, showreel} = this.state;
 
       return (
-        headerLoading && footerLoading && videoLoading
+      showreelLoading && headerLoading && footerLoading && videoLoading
         ?
         <div  className="App"><p>Loading</p> </div>
         :
         <div className="App">
         <Header isOpen={isOpen} menu={header.menu} logo={header.logo} email={header.email} phone={header.phone}/>
-          <p>{footer.companyInfo}</p>
-        <Video videoLoading={videoLoading} videoArray={videoArray} />
+        <Showreel showreel={showreel}/>
+
+          <p className="footer">{footer.companyInfo}</p>
         </div> )
 
 
