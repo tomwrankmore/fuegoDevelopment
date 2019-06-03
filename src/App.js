@@ -24,7 +24,13 @@ class App extends Component {
    team : [
 
    ],
-   isLoading: true
+   footerLoading: true,
+   headerLoading: true,
+   videoLoading: true,
+   videoArray: [
+
+   ],
+   isOpen: false
   }
 }
 
@@ -38,32 +44,53 @@ class App extends Component {
           footer: footer
         })
       })
+      this.setState({
+        footerLoading: false
+      })
     })
     const headerQuery = `*[_type == "header"] `
     sanityClient.fetch(headerQuery).then(header => {
 
       header.forEach(header => {
+
         this.setState({
           header: header
         })
       })
+        this.setState({headerLoading: false})
     })
 
-      this.setState({isLoading: false})
+    const videoQuery = `*[_type == "video"]{
+      date, description, title, vimeoLink, teamMembers[]->{name}, client[]->{clientName}}
+    `
+    sanityClient.fetch(videoQuery).then(video => {
+
+      video.forEach(video => {
+
+          this.state.videoArray.push(video)
+
+      })
+      this.setState({videoLoading: false})
+
+    })
+
 
   }
 
 
   render() {
 
-      let { footer, header} = this.state;
-
+      let { footer, header, headerLoading, footerLoading, videoLoading, videoArray, isOpen} = this.state;
 
       return (
-        this.state.isLoading ? <div className="App"><p>Loading</p></div> : <div className="App">
-        <Header menu={header.menu} logo={header.logo} email={header.email} phone={header.phone}/>
+        headerLoading && footerLoading && videoLoading
+        ?
+        <div  className="App"><p>Loading</p> </div>
+        :
+        <div className="App">
+        <Header isOpen={isOpen} menu={header.menu} logo={header.logo} email={header.email} phone={header.phone}/>
           <p>{footer.companyInfo}</p>
-        <Video isLoaded={this.state.isLoaded} />
+        <Video videoLoading={videoLoading} videoArray={videoArray} />
         </div> )
 
 

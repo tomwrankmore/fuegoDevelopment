@@ -1,58 +1,35 @@
-import React, {Component} from 'react';
-import sanityClient from '../Client';
-import '../css/Video.css'
+import React from 'react';
+import '../css/Video.css';
 
-class Video extends Component {
-  constructor(props) {
-  super(props)
-  this.state = {
-   videoArray : [
-   ],
-   loaded: false
-  }
+
+const Video = ({videoLoading, videoArray}) => {
+
+
+
+  return (
+  videoLoading ? <p>Loading</p> :  <div className="videoContainer">
+
+      {videoArray.map((video, id) => {
+        return (
+
+          <div key={id} className="video">
+
+            <h3>{video.title}</h3>
+
+            <iframe title={id} src={video.vimeoLink}></iframe>
+              {video.teamMembers.map((teamMember, id) => {
+                  return( <p key={id}> {teamMember.name} </p>)
+                })}
+                {video.client.map((client, id) => {
+                    return( <p key={id}> {client.clientName} </p>)
+                  })}
+
+
+          </div>
+        )
+      })}
+
+    </div>
+  )
 }
-componentDidMount() {
-
-const videoQuery = `*[_type == "video"]{vimeoLink, title, date, client[0...100]->, teamMembers[0...100]->
-}
-`
-sanityClient.fetch(videoQuery).then(video => {
-
-  video.forEach(video => {
-
-      this.state.videoArray.push(video)
-
-  })
-  this.setState({loaded: true})
-})
-}
-
-    render(){
-      let { videoArray, loaded} = this.state;
-    return (
-
-      loaded && !this.props.isLoaded ? <div className="videoContainer">
-
-            {videoArray.map((video, id) => {
-              return (
-                <div key={id} className="video">
-                  <h3>{video.title}</h3>
-                    <p>{`client:${video.client.map((client, id) => {
-                        return ' ' + client.clientName
-                      })}`}</p>
-                  <iframe title={id} src={video.vimeoLink}></iframe>
-                  <p>{`team:${video.teamMembers.map((teamMember, id) => {
-                      return ' ' + teamMember.name
-                    })}`}</p>
-                </div>
-              )
-            })}
-
-      </div> : <p>loading</p>
-    )
-  }
-
-}
-
-
 export default Video

@@ -11,23 +11,23 @@
   text-decoration: none;
   color: black;
 }
+.header {
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: relative;
+  height: 80px;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr 8fr 1fr;
+}
 
 img {
-  width: 300px;
+  width: 100%;
   height: auto;
 }
-
-.menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-  width: 100%;
-  padding: 0;
-}
-li a {
-  text-decoration: none;
-  color: black;
-  margin: 10px;
-  padding: 10px;
+.logoLink {
+  width: 100px;
+  height: 100%;
 }
