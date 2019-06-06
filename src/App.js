@@ -3,7 +3,8 @@ import './App.css';
 import sanityClient from './Client';
 import Header from './Components/Header';
 import Video from './Components/Video';
-import Showreel from './Components/Showreel'
+import Home from './Containers/Home'
+import About from './Containers/About'
 
 class App extends Component {
 
@@ -20,21 +21,23 @@ class App extends Component {
       email: ''
     },
    client : [
-
    ],
    team : [
-
    ],
    footerLoading: true,
    headerLoading: true,
    videoLoading: true,
    showreelLoading: true,
    videoArray: [
-
    ],
    showreel: [],
-   isOpen: false
+   route: 'Showreel',
+
   }
+}
+  onRouteChange = (route) => {
+this.setState({route: route});
+
 }
 
   componentDidMount() {
@@ -91,12 +94,13 @@ class App extends Component {
     })
 
 
+
   }
 
 
   render() {
 
-      let { footer, header, headerLoading, footerLoading, videoLoading, showreelLoading, videoArray, isOpen, showreel} = this.state;
+      let { footer, header, headerLoading, footerLoading, videoLoading, showreelLoading, videoArray, route, showreel} = this.state;
 
       return (
       showreelLoading && headerLoading && footerLoading && videoLoading
@@ -104,11 +108,17 @@ class App extends Component {
         <div  className="App"><p>Loading</p> </div>
         :
         <div className="App">
-        <Header isOpen={isOpen} menu={header.menu} logo={header.logo} email={header.email} phone={header.phone}/>
-        <Showreel showreel={showreel}/>
+        <Header onRouteChange={this.onRouteChange} menu={header.menu} logo={header.logo} email={header.email} phone={header.phone}/>
+        {
+          route === 'Showreel' ?  <Home showreel={showreel}/>
+        : ( route === 'About' ?  <About showreel={showreel} />
+        : <p>hello</p>
 
-          <p className="footer">{footer.companyInfo}</p>
-        </div> )
+        )
+      }
+        <p className="footer">{footer.companyInfo}</p>
+      </div>
+       )
 
 
 
