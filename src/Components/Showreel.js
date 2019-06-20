@@ -4,12 +4,10 @@ import '../css/Showreel.css';
 
 const Showreel = ({ showreel }) => {
 
-
-
   return (
   <div className="showreel">
 
-        <iframe muted autoplay frameborder="0" allow="autoplay; fullscreen" allowfullscreen src={showreel.vimeoLink}></iframe>
+        <iframe title="showreel" frameBorder="0" allow="autoplay; fullscreen" src={showreel.vimeoLink}></iframe>
 
     </div>
   )

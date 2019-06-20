@@ -19,6 +19,7 @@
   display: grid;
   justify-items: center;
   align-items: center;
+  border-bottom: 1px solid black;
   grid-template-columns: 1fr 8fr 1fr;
 }
 

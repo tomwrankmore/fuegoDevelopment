@@ -1,22 +1,17 @@
-import React, {Component } from 'react';
+import React from 'react';
 import '../css/Menu.css'
 import { slide as Menu } from 'react-burger-menu';
+import { NavLink } from 'react-router-dom'
 
-const HamburgerMenu = ({onRouteChange, menu}) => {
 
 
+const HamburgerMenu = ({onRouteChange, menu, menuOpen, handleStateChange, closeMenu}) => {
 
     return (
-      <Menu isOpen={() => {
-          if(true) {
-            return false
-          } else {
-            return true
-          }}
-        } disableAutoFocus right>
+      <Menu onStateChange={(state) => handleStateChange(state)} isOpen={menuOpen} disableAutoFocus right>
       {menu.map((menu, _id) => {
         return (
-            <p onClick={() => onRouteChange(menu.name)} className="menuLink" key={_id}>{menu.name}</p>
+          <NavLink onClick={() => closeMenu()}  className="menuLink" key={_id} to={menu.name}>{menu.name}</NavLink>
         )
       })}
       </Menu>

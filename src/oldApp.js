@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import sanityClient from './Client';
 import Header from './Components/Header';
 import Home from './Containers/Home'
 import About from './Containers/About';
 import Content from './Containers/Content'
-
-
-
-
 
 class App extends Component {
 
@@ -25,23 +21,28 @@ class App extends Component {
       phone: '',
       email: ''
     },
-    loading: {
+   client : [
+   ],
+   team : [
+   ],
+
+   loading: {
      footerLoading: true,
-     headerLoading: true
+     headerLoading: true,
+
+     showreelLoading: true,
+     aboutLoading: true
    },
-   menuOpen: false
+   about: {},
+   showreel: [],
+   route: 'Showreel',
+
   }
 }
+  onRouteChange = (route) => {
+this.setState({route: route});
 
-  handleStateChange (state) {
-      this.setState({menuOpen: state.isOpen})
-    }
-
-    // This can be used to close the menu, e.g. when a user clicks a menu item
-    closeMenu () {
-      this.setState({menuOpen: false})
-    }
-
+}
 
 
 
@@ -62,6 +63,41 @@ class App extends Component {
         }
     }))
     })
+    const showQuery = `*[_type == "showreel"] `
+    sanityClient.fetch(showQuery).then(showreel => {
+
+      showreel.forEach(showreel => {
+        this.setState({
+          showreel: showreel
+        })
+      })
+      this.setState(prevState => ({
+        loading: {
+            ...prevState.loading,
+            showreelLoading:false
+        }
+    }))
+
+
+    })
+    const aboutQuery = `*[_type == "about"] {
+      header, desc, image, teamMembers[]->{name}
+    }`
+    sanityClient.fetch(aboutQuery).then(about => {
+
+      about.forEach(about => {
+        this.setState({
+          about: about
+        })
+      })
+      this.setState(prevState => ({
+        loading: {
+            ...prevState.loading,
+            aboutLoading:  false
+        }
+    }))
+
+    })
     const headerQuery = `*[_type == "header"]`
     sanityClient.fetch(headerQuery).then(header => {
 
@@ -78,51 +114,30 @@ class App extends Component {
         }
     }))
     })
-
-
   }
 
 
   render() {
-      let { footer, header, loading, menuOpen} = this.state;
+
+      let { footer, header, loading,  route, showreel, about} = this.state;
       return (
         Object.keys(loading).every(function(k){ return loading[k] })
         ?
         <div  className="App AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
         :
-        <BrowserRouter>
-          <div className="App">
-            <Header menuOpen={menuOpen} handleStateChange={this.handleStateChange.bind(this)} closeMenu={this.closeMenu.bind(this)} menu={header.menu} logo={header.logo} email={header.email} phone={header.phone}/>
-            <Switch>
-              <Route
-                path={'/'}
-                component={Home}
-                exact
-                />
-                <Route
-                  path={'/About'}
-                  component={About}
-                  exact
-                  />
-                  <Route
-                    path={'/Content'}
-                    component={Content}
-                    exact
-                    />
-                    <Route
-                      path={'/Showreel'}
-                      component={Home}
-                      exact
-                      />
-            </Switch>
-
-            <p className="footer">{footer.companyInfo}</p>
-          </div>
+        <div className="App">
+        <Header onRouteChange={this.onRouteChange} menu={header.menu} logo={header.logo} email={header.email} phone={header.phone}/>
+        {
+          route === 'Showreel' ?  <Home showreel={showreel}/>
+        : ( route === 'About' ?  <About about={about} />
 
 
-        </BrowserRouter>
+    : <Content  />
 
-
+        )
+      }
+        <p className="footer">{footer.companyInfo}</p>
+      </div>
        )
 
 

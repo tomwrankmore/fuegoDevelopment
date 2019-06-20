@@ -1,0 +1,27 @@
+.aboutHeader {
+  margin-top: 100px;
+}
+
+.aboutSection {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.aboutDesc {
+  text-align: left;
+  width: 40%;
+}
+.aboutImage {
+  width: 40%;
+}
+.aboutTeam {
+  width: 100%;
+  display: flex;
+  justify-content:flex-start;
+  flex-flow: row;
+}
+.aboutTeam * {
+  margin-right: 5px;
+}

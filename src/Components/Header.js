@@ -10,16 +10,16 @@ function urlFor(source) {
 }
 
 
-const Header = ({ email, phone, logo, menu, onRouteChange}) => {
+const Header = ({ email, phone, logo, menu, menuOpen, handleStateChange, closeMenu}) => {
 
   return (
 
     <div className="header">
       <div className="logoDiv">
-          <a className="logoLink" href='google.com'><img alt="Logo" src={urlFor(logo).width(500).url()}/></a>
+          <a className="logoLink" href='/'><img alt="Logo" src={urlFor(logo).width(500).url()}/></a>
       </div>
       <div className="space"></div>
-      <HamburgerMenu onRouteChange={onRouteChange} menu={menu}/>
+      <HamburgerMenu menuOpen={menuOpen} handleStateChange={handleStateChange} closeMenu={closeMenu} menu={menu}/>
     </div>
   )
 }

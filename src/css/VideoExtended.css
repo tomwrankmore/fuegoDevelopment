@@ -1,0 +1,21 @@
+.videoExt {
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  grid-gap: 2%;
+  margin-top: 150px;
+  width: 90%;
+}
+
+.videoExtContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.videoExtVideo {
+  min-width: 100%;
+  position: relative;
+}
+.videoExtVideo iframe {
+  width: 100%;
+  height: 500px;
+}
