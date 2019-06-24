@@ -11,7 +11,7 @@ function urlFor(source) {
 }
 
 
-class VideoExtended extends Component {
+class Client extends Component {
 
   constructor(props) {
   super(props)
@@ -21,14 +21,14 @@ class VideoExtended extends Component {
     video: '',
     clientName: '',
     clientResult: [],
-    match: props.match.url.slice(9)
+    match: props.match.url.slice(8)
   }
 }
 
 componentDidMount() {
 
   const videoQuery = `*[_type == "video"]{
-    date, description, title, thumbnail, vimeoLink, teamMembers[]->{name}, client[]->{clientName}}
+    date, description, title, thumbnail, vimeoLink, teamMembers[]->{name}, client[]->{clientName, description}}
   `
   sanityClient.fetch(videoQuery).then(video => {
 
@@ -72,7 +72,10 @@ render() {
              </div>
              <div  className="videoExtDesc">
                <h2>About</h2>
-                 <p className="videoExtDescP">{video.description}</p>
+               {video.client.map((client, id) => {
+                   return( <p key={id}> {client.description} </p>)
+                 })}
+
                  <div className="videoExtTeam">
                    <p style={{fontWeight: 'bold'}}>Team Members:</p>
                    {video.teamMembers.map((teamMember, id) => {
@@ -123,4 +126,4 @@ render() {
 }
 
 
-export default VideoExtended
+export default Client

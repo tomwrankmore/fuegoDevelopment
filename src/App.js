@@ -6,7 +6,7 @@ import Header from './Components/Header';
 import Home from './Containers/Home'
 import About from './Containers/About';
 import Content from './Containers/Content'
-
+import Client from './Containers/Client'
 
 
 
@@ -102,17 +102,25 @@ class App extends Component {
                 <Route
                   path={'/About'}
                   component={About}
-                  exact
+
                   />
                   <Route
                     path={'/Content'}
                     component={Content}
-                    exact
                     />
+                    <Route
+                      path={`/Client/:clientId`}
+                      render={
+                          (props) => {
+                            return <Client {...props} />
+                          }
+                        }
+
+                      />
                     <Route
                       path={'/Showreel'}
                       component={Home}
-                      exact
+
                       />
             </Switch>
 

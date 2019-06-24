@@ -1,27 +1,74 @@
 .aboutHeader {
   margin-top: 100px;
 }
+.About {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .aboutSection {
-  margin-top: 100px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align: center;
   width: 100%;
+  max-width: 1200px;
+  height: auto;
+  margin-bottom: 5px;
+
 }
 .aboutDesc {
   text-align: left;
-  width: 40%;
+  width: 80%;
 }
+
 .aboutImage {
-  width: 40%;
+  width: 100%;
 }
 .aboutTeam {
+  margin-top: 10%;
   width: 100%;
   display: flex;
   justify-content:flex-start;
-  flex-flow: row;
+  flex-flow: row wrap;
 }
 .aboutTeam * {
+  padding: 0;
+  margin: 2px 0;
   margin-right: 5px;
+}
+
+@media screen and (max-width: 981px) {
+  .aboutHeader {
+    font-size: 22px;
+  }
+  .aboutDesc h2 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 14px;
+  }
+  .aboutSection {
+    width: 600px;
+
+    grid-template-columns: 1fr;
+    grid-gap: 1.8em;
+  }
+  .aboutImage {
+    order: 2;
+  }
+  .aboutDesc {
+    order: 1;
+    text-align: center;
+    width: 100%;
+
+
+  }
+  .aboutDescP {
+    padding: 0 15%;
+  }
+  .aboutTeam {
+    padding: 0 15%;
+  }
 }

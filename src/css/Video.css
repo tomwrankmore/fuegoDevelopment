@@ -1,9 +1,8 @@
 .videoContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 2%;
+  grid-template-columns:1fr 1fr 1fr 1fr;
   margin-top: 150px;
-  width: 90%;
+  width: 95%;
 }
 
 .video {
@@ -16,4 +15,49 @@
   width: 100%;
   min-width: 100%;
   height: auto;
+}
+
+.videoHover {
+  position:absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: rgba(255,255,255,0.9);
+  opacity: 0;
+  transition: all .7s ease-in-out;
+  z-index: -1;
+  color: black;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+.hoverText {
+  text-align: center;
+}
+.videoImgContainer {
+  position: relative;
+  height: auto;
+  width: 100%;
+  cursor: pointer;
+}
+.videoImgContainer:hover .videoHover{
+  opacity: 1;
+  height: 100%;
+  z-index: 1;
+}
+
+.videoLink {
+  height: 100%;
+  width: 100%;
+}
+
+
+@media screen and (max-width: 981px) {
+  .videoContainer{
+    grid-template-columns:auto;
+  }
+
+
 }

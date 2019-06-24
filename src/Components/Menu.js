@@ -11,7 +11,7 @@ const HamburgerMenu = ({onRouteChange, menu, menuOpen, handleStateChange, closeM
       <Menu onStateChange={(state) => handleStateChange(state)} isOpen={menuOpen} disableAutoFocus right>
       {menu.map((menu, _id) => {
         return (
-          <NavLink onClick={() => closeMenu()}  className="menuLink" key={_id} to={menu.name}>{menu.name}</NavLink>
+          <NavLink onClick={() => closeMenu()}  className="menuLink" key={_id} to={`/${menu.name}`}>{menu.name}</NavLink>
         )
       })}
       </Menu>

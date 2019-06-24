@@ -1,6 +1,8 @@
 .App {
   text-align: center;
-
+  min-height: 98vh;
+  max-height: auto;
+  position: relative;
 }
 .AppLoading {
   height: 100vh;
@@ -10,8 +12,7 @@
   align-items: center;
 }
 .footer {
-  margin-top: 40px;
-  position: relative;
+  position: absolute;
   bottom: 0;
   width: 100%;
 }
