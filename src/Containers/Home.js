@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import sanityClient from '../Client';
 import Slider from 'react-animated-slider';
-import 'react-animated-slider/build/horizontal.css';
 import "../css/Home.css"
+import 'react-animated-slider/build/horizontal.css';
+
 
 class Home extends Component {
 
@@ -13,6 +14,7 @@ class Home extends Component {
       home: [],
     }
   }
+
   componentDidMount() {
     const homeQuery = `*[_type == "home"] `
     sanityClient.fetch(homeQuery).then(home => {
@@ -32,17 +34,23 @@ class Home extends Component {
   }
   render() {
     let { home, homeLoading } = this.state
-
+    const settings = {
+      autoplay: 3000,
+      animateOut: console.log('hello')
+    }
     return (
       homeLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
 
       <div className="homeDivCont">
-        <Slider autoplay={3000} >
+        <Slider 
+        {...settings} >
             {
               home.map((homeVid, id) =>
-                  <div className="sliderDivCont">
-                    <iframe className="homeIframe" key={id} title={homeVid.title} frameBorder="0" allow="autoplay; fullscreen" src={homeVid.vimeoLink}></iframe>
-                  </div>
+              <div className="iframeCont">
+                 <iframe style={{width: '100vw'}} className="iframeVid" key={id} title={homeVid.title} frameBorder="0" allow="autoplay; fullscreen" src={homeVid.vimeoLink}></iframe>
+              </div>
+                   
+                  
 
 
               )

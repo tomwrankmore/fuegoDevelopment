@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr ;
   grid-gap: 2%;
-  margin-top: 150px;
   width: 90%;
 }
 .videoExtDesc {
@@ -89,4 +88,10 @@
   opacity: 1;
   height: 100%;
   z-index: 1;
+}
+.slider {
+  overflow: visible !important;
+}
+.slick.current {
+  transform: scale(1.2) !important;
 }
