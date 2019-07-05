@@ -3,6 +3,10 @@ import '../css/VideoExtended.css';
 import { Link } from 'react-router-dom';
 import sanityClient from '../Client';
 import imageUrlBuilder from '@sanity/image-url';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import '../css/Client.css';
 
 
 const builder = imageUrlBuilder(sanityClient)
@@ -21,7 +25,8 @@ class Client extends Component {
     video: '',
     clientName: '',
     clientResult: [],
-    match: props.match.url.slice(8)
+    match: props.match.url.slice(8),
+
   }
 }
 
@@ -44,7 +49,7 @@ componentDidMount() {
       const clientArray = this.state.videoArray.filter(video => video.client[0].clientName === client)
       const clientResult = clientArray.filter(video =>
       video.title !== this.state.match)
-      console.log(clientResult)
+
       this.setState({
         clientName: client,
         clientResult: clientArray,
@@ -57,6 +62,20 @@ componentDidMount() {
 
 render() {
   let { video, videoLoading, clientResult} = this.state
+  const handleOnDragStart = e => e.preventDefault()
+  const settings = {
+    className: 'center',
+      dots: true,
+      arrows: true,
+      infinite: true,
+      slidesToShow: 2,
+       centerPadding: "40px",
+      speed: 500,
+      centerMode: true,
+       variableWidth: true,
+      slidesToScroll: 1,
+
+    };
   return (
     videoLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
       <div className="videoExtContainer">
@@ -81,29 +100,29 @@ render() {
                    {video.teamMembers.map((teamMember, id) => {
                        return( <p key={id}> {teamMember.name} </p>)
                      })}</div>
+                        <h3>{`More work with ${video.client[0].clientName}`}</h3>
+                   <div className="clientMoreDiv">
+                       <Slider {...settings}>
+                         {
+                           clientResult.map((clientVideo, id) => {
+                              return (
+                                <div onDragStart={handleOnDragStart} className="clientSlideDiv" key={id}>
+                                  <Link  onClick={() => {this.state.video.push(clientVideo)
+                                      this.state.video.shift()
+                                    }} className="clientLink" to={`/Client/${clientVideo.title}`}>
+                                    <p className="clientLinkTitle">{clientVideo.title}</p>
+                                    <img alt="client img" className="clientImg" src={urlFor(clientVideo.thumbnail).url()}/>
 
-                  <div>
+                                  </Link>
+                                </div>
+                              )
+                         })}
+                       </Slider>
 
-                     <h3>{`More work with ${video.client[0].clientName}`}</h3>
-                     <div className="moreByClient">
-                       {
-                         clientResult.map((clientVideo, id) => {
-                            return (
-                               clientVideo.title !== video.title ?
-                              <div key={id} className="clientDiv" >
-                                <Link onClick={() => {this.state.video.push(clientVideo)
-                                    this.state.video.shift()
-                                  }} className="videoLink" to={`/Content/${clientVideo.title}`}>
-                                  <img alt="client img" className="clientImg" src={urlFor(clientVideo.thumbnail).url()}/>
-                                  <div className="clientHover">
-                                    <p>{clientVideo.title}</p>
-                                  </div>
-                                </Link>
-                              </div> : <div className="null"key={id}></div>
-                            )
-                    })}
 
-                     </div>
+
+
+
 
 
 

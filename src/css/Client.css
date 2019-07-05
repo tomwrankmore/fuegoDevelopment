@@ -1,0 +1,59 @@
+.moreByClient {
+  width: 100%;
+  position: relative;
+  height: auto;
+}
+
+.clientLink {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: black;
+}
+.clientLinkTitle {
+
+}
+.clientSlideDiv {
+  margin: 0;
+  padding: 50px 0;
+
+}
+.clientSlideDiv *:focus {
+  outline: 0
+}
+.slick-next {
+  margin-top: 5%
+}
+.slick-prev {
+  margin-top: 5%;
+}
+.slick-arrow.slick-prev::before {
+
+  color: black;
+}
+.slick-arrow.slick-next::before {
+
+  color: black;
+}
+  .clientImg {
+    max-width:150px;
+    width: 150px;
+    height: 150px;
+    color: black;
+  }
+.clientMoreDiv {
+  width: 500px;
+}
+.slick-slide {
+  transition: all ease-in-out .5s;
+}
+.slick-center {
+
+  transform: scale(1.3)
+}

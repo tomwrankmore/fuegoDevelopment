@@ -40,12 +40,13 @@
 }
 .null {
   position: absolute;
+  display: none;
 }
 .moreByClient {
-  width: 100%;
-
-  display: grid;
-    grid-template-columns: 1fr 1fr;
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   position: relative;
 }
 .clientImg {
@@ -63,7 +64,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 .clientHover {
   position:absolute;

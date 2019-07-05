@@ -7,7 +7,7 @@ import Home from './Containers/Home'
 import About from './Containers/About';
 import Content from './Containers/Content'
 import Client from './Containers/Client'
-
+import ShowreelCont from './Containers/Showreel'
 
 
 
@@ -16,9 +16,6 @@ class App extends Component {
   constructor(props) {
   super(props)
   this.state = {
-    footer: {
-      companyInfo: ''
-    },
     header: {
       menu: [],
       logo: '',
@@ -26,7 +23,6 @@ class App extends Component {
       email: ''
     },
     loading: {
-     footerLoading: true,
      headerLoading: true
    },
    menuOpen: false
@@ -47,21 +43,7 @@ class App extends Component {
 
   componentDidMount() {
 
-    const footerQuery = `*[_type == "footer"] `
-    sanityClient.fetch(footerQuery).then(footer => {
 
-      footer.forEach(footer => {
-        this.setState({
-          footer: footer
-        })
-      })
-      this.setState(prevState => ({
-        loading: {
-            ...prevState.loading,
-            footerLoading:false
-        }
-    }))
-    })
     const headerQuery = `*[_type == "header"]`
     sanityClient.fetch(headerQuery).then(header => {
 
@@ -84,7 +66,7 @@ class App extends Component {
 
 
   render() {
-      let { footer, header, loading, menuOpen} = this.state;
+      let { header, loading, menuOpen} = this.state;
       return (
         Object.keys(loading).every(function(k){ return loading[k] })
         ?
@@ -119,12 +101,17 @@ class App extends Component {
                       />
                     <Route
                       path={'/Showreel'}
-                      component={Home}
+                      component={ShowreelCont}
 
                       />
+                      <Route
+                        path={'/Home'}
+                        component={Home}
+
+                        />
             </Switch>
 
-            <p className="footer">{footer.companyInfo}</p>
+
           </div>
 
 

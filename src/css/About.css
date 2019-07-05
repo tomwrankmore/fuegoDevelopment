@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 .aboutSection {
@@ -16,7 +17,7 @@
   max-width: 1200px;
   height: auto;
   margin-bottom: 5px;
-
+  min-height: 65vh;
 }
 .aboutDesc {
   text-align: left;
@@ -38,7 +39,12 @@
   margin: 2px 0;
   margin-right: 5px;
 }
-
+.footer {
+  position: relative;
+  bottom: 0;
+  font-size: 10px;
+  width: 100%;
+}
 @media screen and (max-width: 981px) {
   .aboutHeader {
     font-size: 22px;

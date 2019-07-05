@@ -11,11 +11,7 @@
   justify-content: center;
   align-items: center;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
+
 .lds-roller {
   display: inline-block;
   position: relative;
@@ -99,4 +95,10 @@
   100% {
     transform: rotate(360deg);
   }
+}
+.slider {
+  overflow: visible !important;
+}
+.slide.current {
+  transform: scale(1.2) !important;
 }

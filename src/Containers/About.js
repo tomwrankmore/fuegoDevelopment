@@ -14,11 +14,16 @@ class About extends Component {
   this.state = {
     aboutLoading: true,
     about: {},
+    footer: {
+      companyInfo: ''
+    },
+    footerLoading: true
   }
 }
 
 
 componentDidMount(){
+
   const aboutQuery = `*[_type == "about"] {
     header, desc, descHeader, image, teamMembers[]->{name}
   }`
@@ -26,23 +31,38 @@ componentDidMount(){
 
     about.forEach(about => {
 
-      this.setState(prevState =>({
+      this.setState({
         about: about
-      }))
+      })
     })
     this.setState(prevState => ({
-          aboutLoading:  false
-
+      aboutLoading: false
   }))
 
+  })
+
+  const footerQuery = `*[_type == "footer"] `
+  sanityClient.fetch(footerQuery).then(footer => {
+
+    footer.forEach(footer => {
+      this.setState({
+        footer: footer
+      })
+    })
+    this.setState(prevState => ({
+      loading: {
+          ...prevState.loading,
+          footerLoading:false
+      }
+  }))
   })
 }
 
   render() {
 
-    let { about, aboutLoading} = this.state
+    let { about, aboutLoading, footer, footerLoading} = this.state
     return (
-        aboutLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
+        aboutLoading && footerLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
       <div className="About">
         <div>
           <h1 className="aboutHeader"> {about.header}</h1>
@@ -61,7 +81,7 @@ componentDidMount(){
             </div>
           </div>
 
-
+                  <p className="footer">{footer.companyInfo}</p>
         </div>
 
       </div>

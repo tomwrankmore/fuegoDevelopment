@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import sanityClient from '../Client';
-import Showreel from '../Components/Showreel'
+import Slider from 'react-animated-slider';
+import 'react-animated-slider/build/horizontal.css';
+import "../css/Home.css"
 
 class Home extends Component {
 
     constructor(props) {
     super(props)
     this.state = {
-      showreelLoading: true,
-      showreel: [],
+      homeLoading: true,
+      home: [],
     }
   }
   componentDidMount() {
-    const showQuery = `*[_type == "showreel"] `
-    sanityClient.fetch(showQuery).then(showreel => {
+    const homeQuery = `*[_type == "home"] `
+    sanityClient.fetch(homeQuery).then(home => {
 
-      showreel.forEach(showreel => {
-        this.setState(prevState =>({
-          showreel: showreel
-        }))
+      home.forEach(homel => {
+        this.setState({
+          home: home
+        })
       })
       this.setState(prevState => ({
-        showreelLoading: false
+        homeLoading: false
     }))
 
 
@@ -29,12 +31,24 @@ class Home extends Component {
 
   }
   render() {
-    let { showreel, showreelLoading } = this.state
-    return (
-      showreelLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
+    let { home, homeLoading } = this.state
 
-      <div>
-        <Showreel showreel={showreel}/>
+    return (
+      homeLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
+
+      <div className="homeDivCont">
+        <Slider autoplay={3000} >
+            {
+              home.map((homeVid, id) =>
+                  <div className="sliderDivCont">
+                    <iframe className="homeIframe" key={id} title={homeVid.title} frameBorder="0" allow="autoplay; fullscreen" src={homeVid.vimeoLink}></iframe>
+                  </div>
+
+
+              )
+            }
+
+        </Slider>
       </div>
     )
   }
