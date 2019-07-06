@@ -12,6 +12,10 @@ class Home extends Component {
     this.state = {
       homeLoading: true,
       home: [],
+      settings: {
+        autoplay: 3000,
+        animateOut: console.log('hello')
+      }
     }
   }
 
@@ -33,11 +37,8 @@ class Home extends Component {
 
   }
   render() {
-    let { home, homeLoading } = this.state
-    const settings = {
-      autoplay: 3000,
-      animateOut: console.log('hello')
-    }
+    let { home, homeLoading, settings } = this.state
+
     return (
       homeLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
 
@@ -46,7 +47,7 @@ class Home extends Component {
         {...settings} >
             {
               home.map((homeVid, id) =>
-              <div className="iframeCont">
+              <div  className="iframeCont">
                  <iframe style={{width: '100vw'}} className="iframeVid" key={id} title={homeVid.title} frameBorder="0" allow="autoplay; fullscreen" src={homeVid.vimeoLink}></iframe>
               </div>
                    

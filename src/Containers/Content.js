@@ -22,22 +22,25 @@ class Content extends Component {
     `
     sanityClient.fetch(videoQuery).then(video => {
       video.forEach(video => {
-        let added = false
-        for(var i = 0; i < this.state.videoArray.length; i++) {
-          if (video.clientWork && this.state.videoArray[i].client[0].clientName === video.client[0].clientName) {
-              added = true
-            
-              break;
-          } else {
-
-            added = true
+         
+          if(this.state.videoArray.length <= 0) {
             this.state.videoArray.push(video)
-            break;
           }
-      }
-      if(!added) {
-        this.state.videoArray.push(video)
-      }
+         else if (video.clientWork) {
+          
+           if(this.state.videoArray.filter(e => e.client[0].clientName === video.client[0].clientName).length > 0) {
+            
+           } else {
+            this.state.videoArray.push(video)
+           }
+           
+          }
+          else {
+            this.state.videoArray.push(video)
+           
+          }
+      
+    
 
       })
       this.setState(prevState => ({
