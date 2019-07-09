@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import '../css/VideoExtended.css';
 import sanityClient from '../Client';
+import imageUrlBuilder from '@sanity/image-url';
 
+const builder = imageUrlBuilder(sanityClient)
+function urlFor(source) {
+  return builder.image(source)
+}
 class VideoExtended extends Component {
 
   constructor(props) {
@@ -16,10 +21,10 @@ class VideoExtended extends Component {
 componentDidMount() {
 
   const videoQuery = `*[_type == "video" && title == "${this.state.match}"]{
-    date, description, title, vimeoLink, teamMembers[]->{name}, client[]->{clientName}}
+    date, description, title, vimeoLink, bts, teamMembers[]->{name}, client[]->{clientName}}
   `
   sanityClient.fetch(videoQuery).then(video => {
-
+    console.log(video)
     video.forEach(video => {
         this.setState({
           video: video
@@ -55,8 +60,23 @@ render() {
                      })}</div>
 
              </div>
+             <div className="bts">
+               <p>
+                 Behind the Scenes
+               </p>
+           {video.bts.length > 0 ? <div className="bts-container">
+            {video.bts.map((bts, id) => {
+              return (
+               <div className="bts-img"><img key={id} alt="BTS" src={urlFor(bts).url()} /></div> 
+              )
+            })}
+           </div> :
+            <div></div>}
+          </div>
            </div>
+           
        </div>
+       
 
 
 

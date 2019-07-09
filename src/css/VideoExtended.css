@@ -1,7 +1,7 @@
 .videoExt {
   display: grid;
-  grid-template-columns: 1fr 1fr ;
-  grid-gap: 2%;
+  grid-template-columns: 1.5fr 1fr ;
+  grid-gap: 5%;
   width: 90%;
 }
 .videoExtDesc {
@@ -27,7 +27,8 @@
 .videoExtContainer {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-content: center;
+
 }
 .videoExtVideo {
   min-width: 100%;
@@ -94,4 +95,25 @@
 }
 .slick.current {
   transform: scale(1.2) !important;
+}
+
+.bts {
+ width: 100%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-flow: wrap column;
+ height: auto;
+
+}
+.bts-container {
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+  width: 100%;
+  flex-flow: wrap row;
+}
+
+.bts-img {
+  width: 33%;
 }

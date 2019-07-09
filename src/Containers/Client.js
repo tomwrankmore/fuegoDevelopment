@@ -47,8 +47,7 @@ componentDidMount() {
       const videoResult = this.state.videoArray.filter(video => video.title === this.state.match)
       const client = videoResult[0].client[0].clientName
       const clientArray = this.state.videoArray.filter(video => video.client[0].clientName === client)
-      const clientResult = clientArray.filter(video =>
-      video.title !== this.state.match)
+    
 
       this.setState({
         clientName: client,

@@ -18,7 +18,7 @@ class Content extends Component {
 }
   componentDidMount() {
     const videoQuery = `*[_type == "video"]{
-      date, clientWork, description, title, thumbnail, vimeoLink, teamMembers[]->{name}, client[]->{clientName}}
+     clientWork, title, thumbnail, client[]->{clientName}}
     `
     sanityClient.fetch(videoQuery).then(video => {
       video.forEach(video => {
