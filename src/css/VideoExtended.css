@@ -1,7 +1,7 @@
 .videoExt {
   display: grid;
-  grid-template-columns: 1.5fr 1fr ;
   grid-gap: 5%;
+  grid-template-columns:1.5fr 1fr ;
   width: 90%;
 }
 .videoExtDesc {
@@ -28,6 +28,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
+  flex-flow: column wrap;
 
 }
 .videoExtVideo {
@@ -98,22 +99,26 @@
 }
 
 .bts {
- width: 100%;
+  align-self: center;
+ width: 70%;
  display: flex;
  justify-content: center;
  align-items: center;
  flex-flow: wrap column;
  height: auto;
+ margin-top: 100px;
 
 }
 .bts-container {
-  display: flex;
-  justify-content: center;
-  align-content: flex-start;
-  width: 100%;
-  flex-flow: wrap row;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2%;
 }
 
 .bts-img {
-  width: 33%;
+  min-width: 100%;
+ 
+}
+.bts-img img {
+  max-width: 100%;
 }

@@ -60,10 +60,12 @@ render() {
                      })}</div>
 
              </div>
-             <div className="bts">
-               <p>
+             
+           </div>
+           <div className="bts">
+               <h2>
                  Behind the Scenes
-               </p>
+               </h2>
            {video.bts.length > 0 ? <div className="bts-container">
             {video.bts.map((bts, id) => {
               return (
@@ -73,8 +75,6 @@ render() {
            </div> :
             <div></div>}
           </div>
-           </div>
-           
        </div>
        
 
