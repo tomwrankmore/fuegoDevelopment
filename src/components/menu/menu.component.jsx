@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, {keyframes} from 'styled-components'
 import './menu.styles.scss'
-import { elastic as Menu } from 'react-burger-menu'
 import { NavLink } from 'react-router-dom'
 import { bounceInLeft } from 'react-animations'
 
@@ -19,13 +18,19 @@ const BounceInLeft = styled.div`
 const HamburgerMenu = ({ menu, menuOpen, handleStateChange, closeMenu}) => {
 
     return (
-      <Menu width={ '200px'} onStateChange={(state) => handleStateChange(state)} isOpen={menuOpen} disableAutoFocus left>
-      {menu.map((menu, id) => {
+      <button class="hamburger hamburger--collapse is-active" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner">
+          {menu.map((menu, id) => {
         return (
         <BounceInLeft key={id}><MenuItem onClick={() => (closeMenu())}  to={`/${menu.name}`}>{menu.name}</MenuItem></BounceInLeft> 
         )
       })}
-      </Menu>
+          </span>
+        </span>
+      </button>
+      
+    
     )
   }
 

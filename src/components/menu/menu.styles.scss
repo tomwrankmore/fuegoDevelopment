@@ -1,3 +1,5 @@
+@import 'hamburgers';
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: relative;
@@ -86,3 +88,4 @@ Note: Beware of modifying this element as it can break the animations - you shou
   left: 0;
   background: rgba(255, 255, 255, 0);
 }
+
