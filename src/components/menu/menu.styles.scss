@@ -1,19 +1,36 @@
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: relative;
-  width: 26px;
-  height: 26px;
+  width: 50px;
+  height: 32px;
 
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #373a47;
+  background: #fff;
+  height: 1px !important;
+  width: 26px;
+  transition: all .2s ease-in-out;
+
+  &:nth-child(2) {
+    width: 40px;
+  }
+  
 }
 
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-  background: #a90000;
+  background: rgba(255, 255, 255, 0.8);
+  &:nth-child(1) {
+    top: 8% !important;
+  }
+  &:nth-child(2) {
+    left: 10% !important;
+  }
+  &:nth-child(3) {
+    top: 72% !important;
+  }
 }
 
 /* Position and sizing of clickable cross button */
@@ -37,18 +54,19 @@ Note: Beware of modifying this element as it can break the animations - you shou
   position: fixed;
   height: 100%;
   top: 0;
+  left: 0;
 }
 
 /* General sidebar styles */
 .bm-menu {
-  background: #ffffff;
-  padding: 2.5em 1.5em 0;
+  padding: 20% 0;
   font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: #adadad;
+  fill: rgba(255,255,255,0.5);
+  width: 100% !important;
 }
 
 /* Wrapper for item list */
@@ -65,12 +83,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Styling of overlay */
 .bm-overlay {
   top: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0);
-}
-.menuLink {
-  cursor: pointer;
-  color: black;
-  margin: 10px 0;
-  font-size: 32px;
+  left: 0;
+  background: rgba(255, 255, 255, 0);
 }

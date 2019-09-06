@@ -1,3 +1,25 @@
+.slick-next {
+  margin-top: 5%
+}
+.slick-prev {
+  margin-top: 5%;
+}
+.slick-arrow.slick-prev::before {
+
+  color: black;
+}
+.slick-arrow.slick-next::before {
+
+  color: black;
+}
+
+.slick-slide {
+  transition: all ease-in-out .5s;
+}
+.slick-center {
+
+  transform: scale(1.3)
+}
 .videoExt {
   display: grid;
   grid-gap: 5%;
@@ -98,27 +120,3 @@
   transform: scale(1.2) !important;
 }
 
-.bts {
-  align-self: center;
- width: 70%;
- display: flex;
- justify-content: center;
- align-items: center;
- flex-flow: wrap column;
- height: auto;
- margin-top: 100px;
-
-}
-.bts-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2%;
-}
-
-.bts-img {
-  min-width: 100%;
- 
-}
-.bts-img img {
-  max-width: 100%;
-}
