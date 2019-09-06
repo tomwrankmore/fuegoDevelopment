@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import styled from 'styled-components'
 import sanityClient from '../../Client'
 import ClientSlider from '../carousel/carousel.component'
-import Client from '../../Client'
 import BTS from '../bts/bts.component'
 
 
@@ -10,14 +9,15 @@ import BTS from '../bts/bts.component'
 const VideoOuterWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   flex-flow: column wrap;`
 
 const VideoInnerWrapper = styled.div`
-  display: grid;
-  grid-gap: 5%;
-  grid-template-columns:1.5fr 1fr ;
-  width: 90%;`
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-flow: column;
+ margin-top: 100px;`
 
 const VideoContainer = styled.div`
   min-width: 100%;
@@ -25,22 +25,27 @@ const VideoContainer = styled.div`
   
   iframe {
     width: 100%;
-    height: 350px;
+    height: 600px;
   }`
 
 const VideoTitle = styled.h2``
 
 const VideoDescContainer = styled.div`
   text-align: left;
-  margin-top: 50px;`
+  width: 75%;
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;`
 
 const VideoDesc = styled.p`
-  padding-right: 25%;`  
+  `  
 
 const Team = styled.div`
   display: flex;
   justify-content: flex-start;
-  width: 85%;
+  width: 100%;
   
   * {
     padding: 0;
@@ -86,11 +91,11 @@ render() {
     videoLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
       <VideoOuterWrapper>
              <VideoInnerWrapper>
-             <VideoContainer>
-               <VideoTitle>{video.title}</VideoTitle>
+             <VideoTitle>{video.title}</VideoTitle>
                  {video.client.map((client, id) => {
                      return( <p key={id}> {client.clientName} </p>)
                    })}
+             <VideoContainer>
                  <iframe title={video.title} frameBorder="0" allow="autoplay fullscreen" src={`https://player.vimeo.com/video/${video.vimeoLink}`}></iframe>
              </VideoContainer>
              <VideoDescContainer>
