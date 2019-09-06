@@ -1,10 +1,23 @@
-import React, {Component} from 'react';
-import Video from '../Components/Video';
-import VideoExtended from '../Components/VideoExtended'
-import { Route, Switch } from 'react-router-dom';
-import '../css/Content.css'
-import sanityClient from '../Client';
+import React, {Component} from 'react'
+import styled from 'styled-components'
+import sanityClient from '../../Client'
+import VideoImage from '../../components/video-image/video-image.component'
 
+const ContentContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  `
+
+const VideoContainer = styled.div`
+  display: grid;
+  grid-template-columns:1fr 1fr 1fr;
+  width: 85%;
+  margin-top: 5%;
+  grid-gap: 15px;
+ `
 
 class Content extends Component {
 
@@ -13,6 +26,9 @@ class Content extends Component {
   this.state = {
     videoLoading: true,
     videoArray: [
+    ],
+    clientWorkArray: [
+
     ]
   }
 }
@@ -37,10 +53,7 @@ class Content extends Component {
           }
           else {
             this.state.videoArray.push(video)
-           
           }
-      
-    
 
       })
       this.setState(prevState => ({
@@ -54,22 +67,18 @@ class Content extends Component {
     let { videoArray, videoLoading } = this.state
     return (
       videoLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
-      <div className="contentDiv">
-        <Switch>
-          <Route path={`/Content/`} exact render={
-              (props) => {
-                return <Video {...props} videoArray={videoArray}/>
-              }
+      <ContentContainer>
+        <h1>Content</h1>
+        <VideoContainer>
+        {
+              videoArray.map((contentVid, id) =>
+              <div key={id}>
+                 <VideoImage video={contentVid} />
+              </div>
+              )
             }
-            />
-          <Route path={`/Content/:videoId`} render={
-              (props) => {
-                return <VideoExtended {...props} />
-              }
-            }
-         />
-      </Switch>
-      </div>
+        </VideoContainer>
+      </ContentContainer>
 
     )
   }
@@ -78,4 +87,4 @@ class Content extends Component {
 
 }
 
-export default Content;
+export default Content

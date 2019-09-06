@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import sanityClient from '../Client';
-import Showreel from '../Components/Showreel'
+import React, { Component } from 'react'
+import sanityClient from '../../Client'
+import Showreel from '../../components/showreel/showreel.component'
 
 class ShowreelCont extends Component {
 
@@ -41,4 +41,4 @@ class ShowreelCont extends Component {
 
 }
 
-export default ShowreelCont;
+export default ShowreelCont
