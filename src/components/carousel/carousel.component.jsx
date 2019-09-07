@@ -4,6 +4,7 @@ import Slider from 'react-slick'
 import { Link } from 'react-router-dom'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import './carousel.styles.scss'
 import sanityClient from '../../Client'
 import imageUrlBuilder from '@sanity/image-url'
 
@@ -23,7 +24,7 @@ const ClientSlideContainer = styled.div`
 
 const ClientLink = styled(Link)`
   width: 200px;
-  height: 200px;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,7 +32,8 @@ const ClientLink = styled(Link)`
   padding: 0;
   margin: 0;
   text-decoration: none;
-  color: black;`
+  color: black;
+  `
 
 const LinkTitle = styled.p`
 `
@@ -39,7 +41,7 @@ const LinkTitle = styled.p`
 const ClientLinkImg = styled.img`
   max-width:150px;
   width: 150px;
-  height: 150px;
+  height: auto;
   color: black;
 `
 
@@ -58,7 +60,7 @@ class ClientSlider extends React.Component {
         }
       }
 componentDidMount() {
-    const videoQuery = `*[_type == "video" && references('maisie-williams')]{
+    const videoQuery = `*[_type == "video" && references('${this.props.clientId}')]{
       date, description, title, thumbnail, vimeoLink, teamMembers[]->{name}, client[]->{clientName, description}}
     `
     sanityClient.fetch(videoQuery).then(video => {
@@ -112,9 +114,7 @@ componentDidMount() {
           clientResult.map((clientVideo, id) => {
             return (
               <ClientSlideContainer onDragStart={handleOnDragStart} key={id}>
-                <ClientLink onClick={() => {this.state.video.push(clientVideo)
-                    this.state.video.shift()
-                  }} to={`/client/${clientVideo.title}`}>
+                <ClientLink to={`/content/${clientVideo.title}`}>
                   <LinkTitle>{clientVideo.title}</LinkTitle>
                   <ClientLinkImg alt="client img" src={urlFor(clientVideo.thumbnail).url()}/>
                 </ClientLink>

@@ -10,7 +10,8 @@ const VideoOuterWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-flow: column wrap;`
+  flex-flow: column wrap;
+  margin-bottom: 100px`
 
 const VideoInnerWrapper = styled.div`
  display: flex;
@@ -69,7 +70,7 @@ componentDidMount() {
   console.log(this.props.match)
 
   const videoQuery = `*[_type == "video" && title == "${this.props.match.params.videoId}"]{
-    date, description, title, vimeoLink, bts, teamMembers[]->{name}, client[]->{clientName}}
+    date, description, clientWork, title, vimeoLink, bts, teamMembers[]->{name}, client[]->{_id, clientName}}
   `
   sanityClient.fetch(videoQuery).then(video => {
     video.forEach(video => {
@@ -86,7 +87,7 @@ componentDidMount() {
 
 render() {
   let { video, videoLoading } = this.state
-  console.log(video)
+  console.log(video.client)
   return (
     videoLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
       <VideoOuterWrapper>
@@ -108,9 +109,16 @@ render() {
                      })}</Team>
 
              </VideoDescContainer>
-           <ClientSlider />
+        { video.clientWork ? <div>
+          {video.client.map((client, id) => {
+                     return( <p key={id}> More By {client.clientName} </p>)
+                   })}
+                    <ClientSlider clientId={video.client[0]._id} />
+        </div>
+       
+          : <BTS video={video} />}
            </VideoInnerWrapper>
-           <BTS video={video} />
+           
            
        </VideoOuterWrapper>
        
