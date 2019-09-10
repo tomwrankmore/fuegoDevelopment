@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import sanityClient from '../../Client'
-import Showreel from '../../components/showreel/showreel.component'
+import Showreel from '../showreel/showreel.component'
 
 class ShowreelCont extends Component {
 

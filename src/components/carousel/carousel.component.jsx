@@ -92,7 +92,7 @@ componentDidMount() {
   
   }
   render() {
-    let { video, videoLoading, clientResult} = this.state
+    let { videoLoading, clientResult} = this.state
     const handleOnDragStart = e => e.preventDefault()
     const settings = {
       className: 'center',
@@ -111,6 +111,7 @@ componentDidMount() {
         videoLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
         <div style={{width: "500px"}}><Slider {...settings}>
         {
+          clientResult.length > 1 ?
           clientResult.map((clientVideo, id) => {
             return (
               <ClientSlideContainer onDragStart={handleOnDragStart} key={id}>
@@ -120,7 +121,7 @@ componentDidMount() {
                 </ClientLink>
               </ClientSlideContainer>
             )
-        })}
+        }): null}
       </Slider>
       </div>
       )

@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import sanityClient from '../../Client'
-import imageUrlBuilder from '@sanity/image-url'
 
 
-const builder = imageUrlBuilder(sanityClient)
-function urlFor(source) {
-  return builder.image(source)
-}
+import ShowreelCont from '../../components/showreel-container/showreel-container.component'
 
 const AboutWrapper = styled.div`
   display: flex;
@@ -22,33 +18,16 @@ const AboutHeader = styled.h1`
 
 const AboutSection = styled.div`
   margin-top: 50px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 1200px;
-  height: auto;
-  margin-bottom: 5px;
-  min-height: 65vh;
+  flex-flow: column
+  width: 100%;`
 
-  @media screen and (max-width: 981px) {
-    width: 600px;
-    grid-template-columns: 1fr;
-    grid-gap: 1.8em;
-  }`
-
-const AboutImgContainer = styled.div`
-  width: 100%;
-  @media screen and (max-width: 981px) {
-    order: 2;
-  }`  
-
-const AboutImg = styled.img`
-`
 
 const AboutDescContainer = styled.div`
   text-align: left;
-  width: 80%;
+  width: 60%;
   @media screen and (max-width: 981px) {
     order: 1;
     text-align: center;
@@ -86,6 +65,11 @@ const AboutTeamContainer = styled.div`
   }
   
   `
+
+const ShowreelContainer = styled.div`
+  width: 1000px;
+  overflow: hidden;`  
+
 const Footer = styled.p`
   position: relative;
   bottom: 0;
@@ -109,7 +93,7 @@ class About extends Component {
 componentDidMount(){
 
   const aboutQuery = `*[_type == "about"] {
-    header, desc, descHeader, image, teamMembers[]->{name}
+    header, desc, descHeader, teamMembers[]->{name}
   }`
   sanityClient.fetch(aboutQuery).then(about => {
 
@@ -151,9 +135,6 @@ componentDidMount(){
         <div>
           <AboutHeader>{about.header}</AboutHeader>
             <AboutSection>
-              <AboutImgContainer>
-                <AboutImg alt="about Fuego Films"  src={urlFor(about.image).width(500).url()} />
-              </AboutImgContainer>
                 <AboutDescContainer>
                   <h2 style={{margin: '0'}}>{about.descHeader}</h2>
                   <AboutDesc>{about.desc} </AboutDesc>
@@ -164,6 +145,10 @@ componentDidMount(){
                       })}
                   </AboutTeamContainer>
                 </AboutDescContainer>
+                <ShowreelContainer>
+                 <ShowreelCont />
+                </ShowreelContainer>
+               
             </AboutSection>
             <Footer>{footer.companyInfo}</Footer>
         </div>

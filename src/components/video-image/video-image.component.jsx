@@ -59,7 +59,7 @@ const VideoItemOverlay = styled.div`
     background: rgba(0,0,0,0.3)
 `
 
-const VideoImage = ({ videoArray, video }) => {
+const VideoImage = ({ video }) => {
   return (
     <VideoLink to={`/content/${video.title}`}>
             <VideoItemContainer >
@@ -70,7 +70,7 @@ const VideoImage = ({ videoArray, video }) => {
                   <VideoTextContainer>
                     <h2>{video.title}</h2>
                     {video.client.map((client, id) => {
-                            return( <p key={id}> {client.clientName} </p>)
+                           return( <p key={id}> {client.clientName} </p>)
                           })}
                   </VideoTextContainer>
              

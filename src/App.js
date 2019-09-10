@@ -10,7 +10,6 @@ const HomePage = lazy(() => import('./pages/home/home.component'))
 const AboutPage = lazy(() => import('./pages/about/about.component'))
 const ContentPage = lazy(() => import('./pages/content/content.component'))
 const ClientPage = lazy(() => import('./pages/client/client.component'))
-const ShowreelPage = lazy(() => import('./pages/showreel/showreel.component'))
 class App extends Component {
 
   constructor(props) {
@@ -95,9 +94,6 @@ class App extends Component {
                       }
                     }
                 />
-                <Route
-                  path={'/showreel'}
-                  component={ShowreelPage}/>
                 <Route
                   path={'/home'}
                   component={HomePage}/>
