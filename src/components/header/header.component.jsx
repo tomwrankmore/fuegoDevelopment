@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import sanityClient from '../../Client'
 import HamburgerMenu from '../menu/menu.component'
@@ -39,15 +39,29 @@ const LogoImg = styled.img`
   max-width: 70%;
   height: auto;`
 
-const Header = ({ logo, menu, menuOpen, handleStateChange, closeMenu}) => {
+const Header = () => {
+  const [header, setHeader] = useState({ 
+    menu: [],
+    logo: '',
+    phone: '',
+    email: ''
+  })
+  useEffect(() => {
+    const headerQuery = `*[_type == "header"]`
+    sanityClient.fetch(headerQuery).then(header => {
 
+      header.forEach(header => {
+        setHeader(header)
+      })
+    })
+  }, [])
   return (
 
-    <HeaderContainer>
-       <HamburgerMenu menuOpen={menuOpen} handleStateChange={handleStateChange} closeMenu={closeMenu} menu={menu}/>
+    <HeaderContainer >
+       <HamburgerMenu onClick={() => console.log('how bout me')} menu={header.menu}/>
       <div></div>
       <LogoContainer>
-          <LogoLink to='/'><LogoImg alt="Logo" src={urlFor(logo).width(500).url()}/></LogoLink>
+          <LogoLink to='/'><LogoImg alt="Logo" src={urlFor(header.logo).width(500).url()}/></LogoLink>
       </LogoContainer>
     </HeaderContainer>
   )

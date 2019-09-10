@@ -63,7 +63,6 @@ class Content extends Component {
   }
 
   render() {
-
     let { videoArray, videoLoading } = this.state
     return (
       videoLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :

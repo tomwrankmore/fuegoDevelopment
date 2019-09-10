@@ -127,7 +127,7 @@ componentDidMount(){
 }
 
   render() {
-
+    
     let { about, aboutLoading, footer, footerLoading} = this.state
     return (
         aboutLoading && footerLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
