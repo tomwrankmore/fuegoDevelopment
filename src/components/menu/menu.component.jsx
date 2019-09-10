@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import styled, {keyframes} from 'styled-components'
 import './menu.styles.scss'
 import { elastic as Menu } from 'react-burger-menu'
@@ -19,21 +19,19 @@ const BounceInLeft = styled.div`
 
 const HamburgerMenu = ({ menu }) => {
    const [menuOpen, menuOpenSwitch] = useState(false)
-   useEffect(() => {
-   if(menuOpen === true) {
-     menuOpenSwitch(!menuOpen)
-   }
-  }, [menuOpen])
 
-  const animateIn = () => {
+   
 
+  const toggleMenu = (state) => {
+
+    if (state.isOpen) menuOpenSwitch(true)
   }
 
     return (
-      <Menu width={ '200px' } onStateChange={() => animateIn} isOpen={menuOpen} disableAutoFocus left>
+      <Menu width={ '200px' } onStateChange={toggleMenu} isOpen={menuOpen} disableAutoFocus left>
         {menu.map((menu, id) => {
           return (
-          <BounceInLeft key={id}><MenuItem onClick={() => menuOpenSwitch(!menuOpen)} to={`/${menu.name}`}>{menu.name}</MenuItem></BounceInLeft> 
+          <BounceInLeft key={id}><MenuItem onClick={() => menuOpenSwitch(false)} to={`/${menu.name}`}>{menu.name}</MenuItem></BounceInLeft> 
           )
         })}
       </Menu>
