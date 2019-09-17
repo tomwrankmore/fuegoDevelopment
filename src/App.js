@@ -9,14 +9,14 @@ import ErrorBoundary from './components/error-boundary/error-boundary.component'
 const HomePage = lazy(() => import('./pages/home/home.component'))
 const AboutPage = lazy(() => import('./pages/about/about.component'))
 const ContentPage = lazy(() => import('./pages/content/content.component'))
-const ClientPage = lazy(() => import('./pages/client/client.component'))
 
 const App = () => {
 
       return (
-          <div className="App">
+          <div id="outer-container" className="App">
             <Header />
-            <Switch>
+            <div id="page-wrap">
+            <Switch >
               <ErrorBoundary>
                 <Suspense fallback={<Spinner/>}>
                   <Route
@@ -29,13 +29,6 @@ const App = () => {
                   <Route exact
                     path={'/content'}
                     component={ContentPage}/>
-                  <Route
-                    path={`/client/:videoId`}
-                    render={
-                        (props) => {
-                          return <ClientPage {...props} />
-                        }
-                      } />
                   <Route path={`/content/:videoId`} render={
                         (props) => {
                           return <VideoExtended {...props} />
@@ -48,8 +41,8 @@ const App = () => {
                 </Suspense>  
               </ErrorBoundary>
             </Switch>
-
-
+            </div>
+            
           </div>
        )
 }

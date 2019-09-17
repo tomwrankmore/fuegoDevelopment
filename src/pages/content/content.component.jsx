@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import sanityClient from '../../Client'
 import VideoImage from '../../components/video-image/video-image.component'
@@ -18,62 +18,52 @@ const VideoContainer = styled.div`
   margin-top: 5%;
   grid-gap: 15px;
  `
+const ImageContainer = styled.div`
+  width: 100%;
+  height: 250px;`
 
-class Content extends Component {
+const Content = () => {
 
-  constructor(props) {
-  super(props)
-  this.state = {
-    videoLoading: true,
-    videoArray: [
-    ],
-    clientWorkArray: [
-
-    ]
-  }
-}
-  componentDidMount() {
+  const [videoArray, setVideoArray] = useState([])
+  useEffect(() =>  {
     const videoQuery = `*[_type == "video"]{
      clientWork, title, thumbnail, client[]->{clientName}}
     `
     sanityClient.fetch(videoQuery).then(video => {
+      const videoArray = []
       video.forEach(video => {
          
-          if(this.state.videoArray.length <= 0) {
-            this.state.videoArray.push(video)
+          if(videoArray.length <= 0) {
+            videoArray.push(video)
           }
          else if (video.clientWork) {
           
-           if(this.state.videoArray.filter(e => e.client[0].clientName === video.client[0].clientName).length > 0) {
+           if(videoArray.filter(e => e.client[0].clientName === video.client[0].clientName).length > 0) {
             
            } else {
-            this.state.videoArray.push(video)
+            videoArray.push(video)
            }
            
           }
           else {
-            this.state.videoArray.push(video)
+            videoArray.push(video)
           }
 
-      })
-      this.setState(prevState => ({
-        videoLoading: false
-    }))
+      }
+      )
+      setVideoArray(videoArray)
     })
-  }
+  }, [])
 
-  render() {
-    let { videoArray, videoLoading } = this.state
     return (
-      videoLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
       <ContentContainer>
         <h1>Content</h1>
         <VideoContainer>
         {
               videoArray.map((contentVid, id) =>
-              <div key={id}>
+              <ImageContainer key={id}>
                  <VideoImage video={contentVid} />
-              </div>
+              </ImageContainer>
               )
             }
         </VideoContainer>
@@ -82,8 +72,5 @@ class Content extends Component {
     )
   }
 
-
-
-}
 
 export default Content

@@ -67,7 +67,6 @@ class VideoExtended extends Component {
 }
 
 componentDidMount() {
-  console.log(this.props.match)
 
   const videoQuery = `*[_type == "video" && title == "${this.props.match.params.videoId}"]{
     date, description, clientWork, title, vimeoLink, bts, teamMembers[]->{name}, client[]->{_id, clientName}}
@@ -87,7 +86,6 @@ componentDidMount() {
 
 render() {
   let { video, videoLoading } = this.state
-  console.log(video.client)
   return (
     videoLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
       <VideoOuterWrapper>

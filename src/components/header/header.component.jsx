@@ -58,7 +58,7 @@ const Header = () => {
   return (
 
     <HeaderContainer >
-       <HamburgerMenu onClick={() => console.log('how bout me')} menu={header.menu}/>
+       <HamburgerMenu menu={header.menu}/>
       <div></div>
       <LogoContainer>
           <LogoLink to='/'><LogoImg alt="Logo" src={urlFor(header.logo).width(500).url()}/></LogoLink>

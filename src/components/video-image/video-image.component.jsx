@@ -58,19 +58,32 @@ const VideoItemOverlay = styled.div`
     height: 100%;
     background: rgba(0,0,0,0.3)
 `
+const VideoTitle = styled.h1`
+`
+const ClientText = styled.p``
 
-const VideoImage = ({ video }) => {
+const VideoImgBackground = styled.div`
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;`
+
+const VideoImage = ({ video, home }) => {
   return (
     <VideoLink to={`/content/${video.title}`}>
             <VideoItemContainer >
                 <VideoItemOverlay />
               <VideoImgContainer>
+                {home ? 
+                <VideoImgBackground style={{ backgroundImage:`url(${urlFor(video.thumbnail).url()})`}}/>
+                  :
+                <VideoImg alt="video img" src={urlFor(video.thumbnail).url()}/>}
                 
-                  <VideoImg alt="video img" src={urlFor(video.thumbnail).url()}/>
                   <VideoTextContainer>
-                    <h2>{video.title}</h2>
+                    <VideoTitle>{video.title}</VideoTitle>
                     {video.client.map((client, id) => {
-                           return( <p key={id}> {client.clientName} </p>)
+                           return( <ClientText key={id}> {client.clientName} </ClientText>)
                           })}
                   </VideoTextContainer>
              

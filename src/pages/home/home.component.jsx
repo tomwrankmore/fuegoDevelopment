@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect} from 'react'
 import styled from 'styled-components'
 import sanityClient from '../../Client'
 import "react-responsive-carousel/lib/styles/carousel.min.css"
@@ -10,7 +10,9 @@ const HomeContainer = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: black;`
+  .carousel.carousel-slider .control-arrow:hover {
+    background: none;
+  }`
 
 const HomeCarousel = styled(Carousel)`
   overflow: hidden;
@@ -28,59 +30,42 @@ const HomeCarousel = styled(Carousel)`
 
 
 
-class Home extends Component {
-
-    constructor(props) {
-    super(props)
-    this.state = {
-      homeLoading: true,
-      home: [],
-      settings: {
-        autoPlay: true,
-        showThumbs: false,
-        infiniteLoop: true,
-        showStatus: false,
-        transitionTime: 800,
-      }
-    }
-  }
-
-  componentDidMount() {
+const Home = () => {
+    const [home, setHome] = useState([])
+  useEffect(() => {
     const homeQuery = `*[_type == "video" && homeVideo]{
       clientWork, title, thumbnail, client[]->{clientName}}
      `
     sanityClient.fetch(homeQuery).then(home => {
-
+      const HomeArray = []
       home.forEach(home => {
-        this.state.home.push(home)
+        HomeArray.push(home)
       })
-      this.setState(prevState => ({
-        homeLoading: false
-    }))
-
-
+      setHome(HomeArray)
     })
+  }, [])
 
-  }
-  render() {
-    let { home, homeLoading, settings } = this.state
-
+    const settings = {
+      autoPlay: true,
+      showThumbs: false,
+      infiniteLoop: true,
+      showStatus: false,
+      transitionTime: 800,
+    }
     return (
-      homeLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
+
       <HomeContainer>
         <HomeCarousel {...settings}>
             {
               home.map((homeVid, id) =>
               <div key={id}>
-                 <VideoImage video={homeVid} />
+                 <VideoImage home={true} video={homeVid} />
               </div>
               )
             }
-
         </HomeCarousel>
       </HomeContainer>
     )
-  }
 
 }
 

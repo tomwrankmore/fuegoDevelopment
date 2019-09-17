@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import sanityClient from '../../Client'
 
-
+import Footer from '../../components/footer/footer-component'
 import ShowreelCont from '../../components/showreel-container/showreel-container.component'
 
 const AboutWrapper = styled.div`
@@ -70,67 +70,29 @@ const ShowreelContainer = styled.div`
   width: 1000px;
   overflow: hidden;`  
 
-const Footer = styled.p`
-  position: relative;
-  bottom: 0;
-  font-size: 10px;
-  width: 100%;`
 
-class About extends Component {
-  constructor(props) {
-  super(props)
-  this.state = {
-    aboutLoading: true,
-    about: {},
-    footer: {
-      companyInfo: ''
-    },
-    footerLoading: true
-  }
-}
+const About = () => {
+  const [about, setAbout] = useState({
+    header: '',
+    desc: '',
+    descHeader: '',
+    teamMembers: []
+  })
+  useEffect(() => {
+    const aboutQuery = `*[_type == "about"] {
+      header, desc, descHeader, teamMembers[]->{name}
+    }`
+    sanityClient.fetch(aboutQuery).then(about => {
 
-
-componentDidMount(){
-
-  const aboutQuery = `*[_type == "about"] {
-    header, desc, descHeader, teamMembers[]->{name}
-  }`
-  sanityClient.fetch(aboutQuery).then(about => {
-
-    about.forEach(about => {
-
-      this.setState({
-        about: about
+      about.forEach(about => {
+       setAbout(about)
       })
     })
-    this.setState(prevState => ({
-      aboutLoading: false
-  }))
+  }, [])
+ 
 
-  })
-
-  const footerQuery = `*[_type == "footer"] `
-  sanityClient.fetch(footerQuery).then(footer => {
-
-    footer.forEach(footer => {
-      this.setState({
-        footer: footer
-      })
-    })
-    this.setState(prevState => ({
-      loading: {
-          ...prevState.loading,
-          footerLoading:false
-      }
-  }))
-  })
-}
-
-  render() {
-    
-    let { about, aboutLoading, footer, footerLoading} = this.state
     return (
-        aboutLoading && footerLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
+       
       <AboutWrapper>
         <div>
           <AboutHeader>{about.header}</AboutHeader>
@@ -150,14 +112,10 @@ componentDidMount(){
                 </ShowreelContainer>
                
             </AboutSection>
-            <Footer>{footer.companyInfo}</Footer>
+            <Footer />
         </div>
       </AboutWrapper>
     )
-  }
-
-
-
 }
 
 export default About
