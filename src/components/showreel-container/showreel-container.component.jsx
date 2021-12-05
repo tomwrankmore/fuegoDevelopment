@@ -1,44 +1,32 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import sanityClient from '../../Client'
-import Showreel from '../showreel/showreel.component'
+import Player from '../player/player.component'
+import styled from 'styled-components'
 
-class ShowreelCont extends Component {
+const PlayCont = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: auto;
+`
 
-    constructor(props) {
-    super(props)
-    this.state = {
-      showreelLoading: true,
-      showreel: [],
-    }
-  }
-  componentDidMount() {
-    const showQuery = `*[_type == "showreel"] `
-    sanityClient.fetch(showQuery).then(showreel => {
+const ShowreelCont = () => {
+	const [showreel, setShowreel] = useState('')
+	useEffect(() => {
+		const showQuery = `*[_type == "showreel"] `
+		sanityClient.fetch(showQuery).then(showreel => {
+			showreel.forEach(showreel => {
+				setShowreel(showreel)
+			})
+		})
+	}, [])
 
-      showreel.forEach(showreel => {
-        this.setState(prevState =>({
-          showreel: showreel
-        }))
-      })
-      this.setState(prevState => ({
-        showreelLoading: false
-    }))
-
-
-    })
-
-  }
-  render() {
-    let { showreel, showreelLoading } = this.state
-    return (
-      showreelLoading ? <div  className=" AppLoading"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> :
-
-      <div>
-        <Showreel showreel={showreel}/>
-      </div>
-    )
-  }
-
+	return (
+		<PlayCont style={{ marginBottom: '50px' }}>
+			<Player video={showreel} />
+		</PlayCont>
+	)
 }
 
 export default ShowreelCont
