@@ -3,94 +3,179 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import sanityClient from '../../Client'
 import imageUrlBuilder from '@sanity/image-url'
+import './video-image.styles.scss'
 
 const builder = imageUrlBuilder(sanityClient)
 function urlFor(source) {
-  return builder.image(source)
+	return builder.image(source)
 }
 
-
-
 const VideoItemContainer = styled.div`
-  text-align: center;
-  width: 100%;
-  height: auto;
-  position: relative;`
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	transition: all 0.2s ease-in-out;
+`
 
 const VideoLink = styled(Link)`
-  height: 100%;
-  width: 100%;
-  color: white;
-  text-decoration: none;
-`   
-const VideoImg = styled.img`
-  width: 100%;
-  min-width: 100%;
-  height: auto;`
+	height: 100%;
+	width: 100%;
+	color: white;
+	text-decoration: none;
+	position: relative;
+`
 
 const VideoTextContainer = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    flex-flow: column;
-    z-index: 2; 
-    
-    * {
-        margin: 0;
-    }`  
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	flex-flow: column;
+	z-index: 2;
 
+	* {
+		margin: 0;
+	}
+`
 
 const VideoImgContainer = styled.div`
-    position: relative;
-    height: auto;
-    width: 100%;
-    cursor: pointer;
-  `
+	position: relative;
+	height: 100%;
+	width: 100%;
+	cursor: pointer;
+`
 const VideoItemOverlay = styled.div`
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.3)
+	position: absolute;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
 `
 const VideoTitle = styled.h1`
+	@media screen and (max-width: 1000px) {
+		font-size: 24px;
+	}
 `
 const ClientText = styled.p``
 
 const VideoImgBackground = styled.div`
-    height: 100vh;
-    width: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;`
+	height: 100vh;
+	width: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+`
 
-const VideoImage = ({ video, home }) => {
-  return (
-    <VideoLink to={`/content/${video.title}`}>
-            <VideoItemContainer >
-                <VideoItemOverlay />
-              <VideoImgContainer>
-                {home ? 
-                <VideoImgBackground style={{ backgroundImage:`url(${urlFor(video.thumbnail).url()})`}}/>
-                  :
-                <VideoImg alt="video img" src={urlFor(video.thumbnail).url()}/>}
-                
-                  <VideoTextContainer>
-                    <VideoTitle>{video.title}</VideoTitle>
-                    {video.client.map((client, id) => {
-                           return( <ClientText key={id}> {client.clientName} </ClientText>)
-                          })}
-                  </VideoTextContainer>
-             
-              </VideoImgContainer>
+const LogoCont = styled.div`
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`
+const Logo = styled.img`
+	width: 50%;
+	height: auto;
+	@media screen and (max-width: 1000px) {
+		width: 40%;
+	}
+`
 
-            </VideoItemContainer>
-            </VideoLink>
-  )
+const VideoImage = ({ video, home, filtered, more, category, clientCat }) => {
+	return (
+		<VideoLink
+			onClick={() => window.scrollTo(0, 0)}
+			to={{
+				pathname: `/content/${video.title}`,
+			}}
+		>
+			<VideoItemContainer className={!home ? 'hover' : null}>
+				<VideoItemOverlay />
+				<VideoImgContainer>
+					<VideoImgBackground
+						style={
+							!home
+								? {
+										height: '100%',
+										backgroundImage: `url(${urlFor(video.thumbnail)
+											.quality(60)
+											.auto('format')
+											.url()})`,
+								  }
+								: {
+										height: '100vh',
+										backgroundImage: `url(${urlFor(video.thumbnail)
+											.quality(70)
+											.auto('format')
+											.url()})`,
+								  }
+						}
+					/>
+					<VideoTextContainer>
+						{video.clientWork && clientCat ? null : video.clientWork &&
+						  !filtered &&
+						  !more ? null : (
+							<VideoTitle>{video.title}</VideoTitle>
+						)}
+
+						{video.client
+							? video.client.map((client, id) => {
+									return !video.clientWork ? (
+										<ClientText key={id}>{client.clientName}</ClientText>
+									) : filtered || more ? (
+										clientCat ? null : (
+											<ClientText key={id}>{client.clientName}</ClientText>
+										)
+									) : null
+							  })
+							: null}
+						{video.clientWork && clientCat && filtered && !more
+							? video.client.map((client, id) =>
+									client.logo.asset ? (
+										<LogoCont key={id}>
+											<Logo
+												alt={client.clientName}
+												src={urlFor(client.logo)
+													.auto('format')
+													.quality(60)
+													.url()}
+											/>
+										</LogoCont>
+									) : (
+										<VideoTitle key={id}>{client.clientName}</VideoTitle>
+									)
+							  )
+							: null}
+						{video.clientWork && !filtered && !more && !home ? (
+							video.client.map((client, id) =>
+								client.logo.asset ? (
+									<LogoCont key={id}>
+										<Logo
+											alt={client.clientName}
+											src={urlFor(client.logo).auto('format').quality(60).url()}
+										/>
+									</LogoCont>
+								) : (
+									<VideoTitle key={id}>{client.clientName}</VideoTitle>
+								)
+							)
+						) : video.clientWork && home ? (
+							<div>
+								<VideoTitle>{video.title}</VideoTitle>
+								{video.client.map((client, id) => (
+									<ClientText key={id}>{client.clientName}</ClientText>
+								))}
+							</div>
+						) : null}
+					</VideoTextContainer>
+				</VideoImgContainer>
+			</VideoItemContainer>
+		</VideoLink>
+	)
 }
 export default VideoImage

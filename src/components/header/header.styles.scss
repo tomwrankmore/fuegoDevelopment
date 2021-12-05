@@ -1,0 +1,18 @@
+.home {
+	span {
+		background: rgba(255, 255, 255, 1);
+		&:nth-child(2) {
+			background: rgba(255, 255, 255, 1);
+		}
+	}
+}
+
+.not-home {
+	span {
+		background: rgba(0, 0, 0, 0.6);
+		&:nth-child(2) {
+			width: 50px;
+			background: rgba(0, 0, 0, 0.5);
+		}
+	}
+}
