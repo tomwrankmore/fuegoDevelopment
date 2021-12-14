@@ -76,8 +76,9 @@ const CatButton = styled.button`
 `
 
 const Content = () => {
-	const { category, videoArray, isFiltered, filter, clientCat } =
+	const { category, videoArray, isFiltered, filter, clientCat, allArray } =
 		useContext(ContentContext)
+
 	return (
 		<ContentContainer>
 			<ContentTitle>Share The Vision.</ContentTitle>

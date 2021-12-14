@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactPlayer from 'react-player'
 import styled from 'styled-components'
 
 const VideoContainer = styled.div`
@@ -16,13 +17,20 @@ const VideoContainer = styled.div`
 const Player = ({ video }) => {
 	return (
 		<VideoContainer>
-			<iframe
+			{/* <iframe
 				title={video.title}
 				frameBorder="0"
 				allow="autoplay"
 				src={`https://player.vimeo.com/video/${video.vimeoLink}?color=9f00ef&byline=0&portrait=0`}
 			></iframe>
-			<script src="https://player.vimeo.com/api/player.js"></script>
+			<script src="https://player.vimeo.com/api/player.js"></script> */}
+			<ReactPlayer
+				className='react-player'
+				url={`https://vimeo.com/${video.vimeoLink}`}
+				width='100%'
+				height='100%'
+				controls={true}
+			/>
 		</VideoContainer>
 	)
 }

@@ -15,8 +15,9 @@ const HomeContextProvider = props => {
 			})
 			setHome(HomeArray)
 		})
+		
 		return
-	}, [])
+	}, [home])
 	return (
 		<HomeContext.Provider value={{ home }}>
 			{props.children}

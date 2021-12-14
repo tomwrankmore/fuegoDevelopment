@@ -11,6 +11,7 @@ import HomeContextProvider from './store/HomeContext'
 const HomePage = lazy(() => import('./pages/home/home.component'))
 const AboutPage = lazy(() => import('./pages/about/about.component'))
 const ContentPage = lazy(() => import('./pages/content/content.component'))
+const DirectorsPage = lazy(() => import('./pages/directors/directors.component'))
 
 const App = () => {
 	return (
@@ -27,6 +28,7 @@ const App = () => {
 							<Route path={'/about'} component={AboutPage} />
 							<ContentContextProvider>
 								<Route exact path={'/content'} component={ContentPage} />
+								<Route exact path={'/directors'} component={DirectorsPage} />
 								<Switch>
 									<Route path={`/content/:videoId`} children={VideoContainer} />
 								</Switch>
