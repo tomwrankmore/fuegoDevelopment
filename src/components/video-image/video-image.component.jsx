@@ -30,8 +30,9 @@ const VideoTextContainer = styled.div`
 	width: 100%;
 	height: 100%;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	padding: 1rem;
+	justify-content: flex-end;
+	align-items: flex-start;
 	position: absolute;
 	top: 0;
 	left: 0;

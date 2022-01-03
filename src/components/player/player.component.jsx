@@ -3,16 +3,21 @@ import ReactPlayer from 'react-player'
 import styled from 'styled-components'
 
 const VideoContainer = styled.div`
-	min-width: 100%;
-	padding: 52.73% 0 0 0;
-	position: relative;
-	iframe {
+	/* min-width: 100%;
+	padding: 52.73% 0 0 0; */
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	/* iframe {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-	}
+	} */
 `
 const Player = ({ video }) => {
 	return (

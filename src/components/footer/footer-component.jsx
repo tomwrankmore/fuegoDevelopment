@@ -6,7 +6,9 @@ const FooterDesc = styled.p`
   position: relative;
   bottom: 0;
   font-size: 10px;
-  width: 100%;`
+  width: 100%;
+  text-align: center;
+  `
 
 const Footer = () => {
   const [footer, setFooter] = useState([])

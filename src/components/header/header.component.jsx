@@ -73,6 +73,7 @@ const HeaderComp = props => {
 		})
 		return
 	}, [])
+	
 	return (
 		<HeaderContainer className={className} {...props}>
 			<HamburgerMenu socials={header.socials} menu={header.menu} />

@@ -1,59 +1,110 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { Carousel } from 'react-responsive-carousel'
-import VideoImage from '../../components/video-image/video-image.component'
 import { HomeContext } from '../../store/HomeContext'
+import classNames from 'classnames'
+import { Link } from 'react-router-dom'
 
 const HomeContainer = styled.div`
 	position: relative;
 	width: 100%;
 	height: 100%;
+	max-width: 100vw;
+    min-height: 100vh;
 	overflow: hidden;
-	background: black;
-	.carousel.carousel-slider .control-arrow:hover  {
-		background: none;
-	}
+	margin: 0 auto;
+	display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 `
 
-const HomeCarousel = styled(Carousel)`
-	overflow: hidden;
-	height: auto;
-	padding: 0;
-	background: black;
+const VideoWrapper = styled.div`
+    position: relative;
+    max-height: 90vh;
+    min-height: 400px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    background: #000;
 
-	.slide iframe {
-		margin: 0 !important;
-		width: 100% !important;
-		min-height: -webkit-fill-available;
-	}
-	.carousel-slider .control-arrow {
-		padding: 20px !important;
-	}
+    &.small {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    &.medium {
+        grid-row: span 1;
+        grid-column: span 2;
+    }
+
+    &.large {
+        grid-column: span 3;
+        grid-row: span 2;
+        min-height: 75vh;
+    }
 `
+
+const DirectorVideo = styled.video`
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+`
+
+const Description = styled.div`
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0.5rem 0.875rem;
+    background: #12121250;
+    z-index: 2;
+    color: white;
+    text-align: left
+    ;
+    h3, p {
+        padding: 0;
+        margin: 0;
+    }
+    h3 {
+        font-size: 1rem;
+    }
+    p {
+        font-size: 0.6875rem;
+    }
+`
+
 
 const Home = () => {
-	const { home } = useContext(HomeContext)
-	const settings = {
-		autoPlay: true,
-		stopOnHover: false,
-		interval: 5000,
-		showThumbs: false,
-		infiniteLoop: true,
-		showStatus: false,
-		transitionTime: 1000,
-	}
+	const { homeData } = useContext(HomeContext)
+
 	return (
 		<HomeContainer>
-			{home ? (
-				<HomeCarousel {...settings}>
-					{home.map((homeVid, id) => (
-						<div key={id}>
-							<VideoImage home={true} video={homeVid} />
-						</div>
-					))}
-				</HomeCarousel>
-			) : null}
+			{homeData.map((homeContent, idx) => {
+                const sizeClass = classNames({
+                    'small': homeContent.videoSize === 'small',
+                    'medium': homeContent.videoSize === 'medium',
+                    'large': homeContent.videoSize === 'large'
+                })
+                return (
+                        <VideoWrapper className={sizeClass} style={{order: homeContent.order}} key={idx}>
+                            <Description>
+                                <h3>{homeContent.projectTitle}</h3>
+                                <p>{homeContent.directorName}</p>
+                            </Description>
+                            <Link to={{
+                                pathname: `/content/${homeContent.projectTitle}`,
+                            }}>
+                                <DirectorVideo muted='muted' loop='loop' playsInline autoPlay preload="none" poster={homeContent.thumbnail}>
+                                    <source src={homeContent.vidURL} />
+                                </DirectorVideo>
+                            </Link>
+                        </VideoWrapper>
+                )
+            })}
 		</HomeContainer>
 	)
 }

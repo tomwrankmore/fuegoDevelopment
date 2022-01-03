@@ -10,7 +10,7 @@ const VideoOuterWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-flow: column wrap;
-	margin-bottom: 100px;
+	/* margin-bottom: 100px; */
 `
 
 const VideoInnerWrapper = styled.div`
@@ -18,11 +18,14 @@ const VideoInnerWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-flow: column;
-	margin-top: 80px;
-	min-width: 80%;
-	@media screen and (max-width: 1000px) {
+	/* margin-top: 80px; */
+	min-width: 100%;
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	/* @media screen and (max-width: 1000px) {
 		min-width: 90%;
-	}
+	} */
 `
 
 const VideoTitle = styled.h2`

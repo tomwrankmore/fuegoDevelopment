@@ -20,8 +20,8 @@ const ContentTitle = styled.h1`
 const VideoContainer = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	width: 85%;
-	grid-gap: 15px;
+	width: 100vw;
+	grid-gap: 0;
 	@media screen and (max-width: 1200px) {
 		grid-template-columns: 1fr 1fr;
 		width: 85%;

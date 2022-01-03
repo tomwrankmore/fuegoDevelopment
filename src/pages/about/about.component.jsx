@@ -202,7 +202,7 @@ const About = () => {
 						<ShowreelCont />
 					</ShowreelContainer>
 				</AboutSection>
-				<Footer />
+				{/* <Footer /> */}
 			</Container>
 		</AboutWrapper>
 	)

@@ -3,23 +3,30 @@ import sanityClient from '../Client'
 export const HomeContext = createContext()
 
 const HomeContextProvider = props => {
-	const [home, setHome] = useState('')
+	const [homeData, setHome] = useState([])
 	useEffect(() => {
-		const homeQuery = `*[_type == "video" && homeVideo]{
-        clientWork, title, thumbnail, client[]->{clientName}}
+		const homeQuery = `
+		*[_type == "homePageContent"] | order(order asc){
+            projectTitle,
+            directorName,
+			order,
+			"vidURL": homePageVideoFile.asset->url,
+			videoSize,
+			"thumbnail": loadingThumbnail.asset->url,
+			vimeoLink
+        }
        `
-		sanityClient.fetch(homeQuery).then(home => {
-			const HomeArray = []
-			home.forEach(home => {
-				HomeArray.push(home)
+		sanityClient.fetch(homeQuery).then(homeContent => {
+			const HomeContentArray = []
+			homeContent.forEach(item => {
+				HomeContentArray.push(item)
 			})
-			setHome(HomeArray)
+			setHome(HomeContentArray)
 		})
-		
 		return
-	}, [home])
+	}, [])
 	return (
-		<HomeContext.Provider value={{ home }}>
+		<HomeContext.Provider value={{ homeData }}>
 			{props.children}
 		</HomeContext.Provider>
 	)

@@ -28,9 +28,9 @@ const ContentContextProvider = props => {
 		})
 		return
 	}, [catQuery])
-	console.log(clientArray)
+	// console.log(clientArray)
 	useEffect(() => {
-		console.log('fetching content')
+		// console.log('fetching content')
 		sanityClient.fetch(videoQuery).then(video => {
 			const videoArray = []
 			const allArray = []
