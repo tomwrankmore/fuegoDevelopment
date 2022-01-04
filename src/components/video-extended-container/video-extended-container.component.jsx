@@ -7,8 +7,6 @@ import sanityClient from '../../Client'
 const VideoContainer = () => {
 	const [video, setVideo] = useState()
 	let id = useParams()
-	console.log(id)
-	// console.log('VideoContainer id params:' , id)
 	// params is pathname passed when you link to this page which is the title of the video.
 	useEffect(() => {
 		const videoQuery = `*[_type == "video" && title == "${id.videoId.trim()}"]{date, description,categories[]->{_id, category}, clientWork, title, vimeoLink, bts, client[]->{_id, clientName}}

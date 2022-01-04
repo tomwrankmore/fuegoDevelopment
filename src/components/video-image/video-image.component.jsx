@@ -58,11 +58,16 @@ const VideoItemOverlay = styled.div`
 	background: rgba(0, 0, 0, 0.3);
 `
 const VideoTitle = styled.h1`
-	@media screen and (max-width: 1000px) {
+	/* @media screen and (max-width: 1000px) {
 		font-size: 24px;
-	}
+	} */
+	font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
 `
-const ClientText = styled.p``
+const ClientText = styled.p`
+	font-size: 0.75rem;
+`
 
 const VideoImgBackground = styled.div`
 	height: 100vh;

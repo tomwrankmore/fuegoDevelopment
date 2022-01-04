@@ -21,6 +21,7 @@ const OuterContainer = styled.div`
     font-family: 'Source Sans Pro', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    margin-bottom: 45px;
 `
 
 const HomePage = lazy(() => import('./pages/home/home.component'));

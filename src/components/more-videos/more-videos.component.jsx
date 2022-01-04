@@ -6,18 +6,18 @@ import { ContentContext } from '../../store/ContentContext'
 
 const VideoContainer = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: repeat( auto-fit, minmax(450px, 1fr) );;
 	width: 100%;
-	grid-gap: 15px;
-	@media screen and (max-width: 1200px) {
+	grid-gap: 0;
+	/* @media screen and (max-width: 1200px) {
 		grid-template-columns: 1fr 1fr;
-		width: 100%%;
+		width: 100%;
 	}
 	@media screen and (max-width: 1000px) {
 		grid-template-columns: 1fr;
 		width: 90%;
 		margin-left: 5%;
-	}
+	} */
 `
 const ImageContainer = styled.div`
 	width: 100%;
@@ -26,8 +26,9 @@ const ImageContainer = styled.div`
 		height: 200px;
 	}
 `
-const MoreByP = styled.p`
-	margin: 25px 0;
+const MoreByP = styled.h1`
+	/* margin: 25px 0; */
+	text-align: center;
 `
 
 const MoreVids = ({ category, currentVideo }) => {

@@ -23,11 +23,16 @@ const PageTitle = styled.h1`
     box-shadow: 0px 0px 15px 5px #000000;
     `
 
+const DirectorsDescription = styled.p`
+    max-width: 50vw;
+    margin-bottom: 2rem;
+`
+
 const DirectorsList = styled.ul`
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: 2rem;
+    font-size: clamp(1.5rem,4vw,6rem);
     font-weight: bold;
     text-transform: uppercase;
 
@@ -36,7 +41,7 @@ const DirectorsList = styled.ul`
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        padding: 1rem 0;
+        padding: 0;
         a {
             text-decoration: none;
             display: block;
@@ -68,7 +73,8 @@ const Directors = () => {
 
 	return (
         <DirectorsContainer>
-            <PageTitle>Directors</PageTitle>
+            {/* <PageTitle>Directors</PageTitle> */}
+            <DirectorsDescription>Copy to describe the list of Directors for page context. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit, quas saepe vero voluptates perferendis ipsa, quae, ducimus illum molestias error quos enim. Temporibus omnis id, voluptatum recusandae repellat obcaecati nemo.</DirectorsDescription>
             <DirectorsList ref={dRef}>
                 {directorData.map((director, idx) => {
                     return (

@@ -10,7 +10,6 @@ const VideoOuterWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-flow: column wrap;
-	/* margin-bottom: 100px; */
 `
 
 const VideoInnerWrapper = styled.div`
@@ -18,14 +17,14 @@ const VideoInnerWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-flow: column;
-	/* margin-top: 80px; */
-	min-width: 100%;
+	min-width: 100vw;
 	position: relative;
-	width: 100vw;
-	height: 100vh;
-	/* @media screen and (max-width: 1000px) {
-		min-width: 90%;
-	} */
+	width: 100%;
+	height: 100%;
+	min-height: 100vh;
+`
+
+const VideoWrapper = styled.div` 
 `
 
 const VideoTitle = styled.h2`
@@ -36,7 +35,7 @@ const VideoTitle = styled.h2`
 `
 
 const VideoDesc = styled.p`
-	margin: 0 0 25px 0;
+	margin: 0;
 `
 
 const VideoExtended = ({ video }) => {
@@ -46,19 +45,24 @@ const VideoExtended = ({ video }) => {
 			{video === 'noVid' ? <VideoTitle>Video Not Found :(</VideoTitle> : null}
 		</div>
 	) : (
+	<>
+
 		<VideoOuterWrapper>
-			<VideoInnerWrapper>
+			<VideoInnerWrapper className='videoInnerWrapper'>
+				<Player video={video} />
 				<VideoTitle>{video.title}</VideoTitle>
 				{video.client
 					? video.client.map((client, id) => {
 							return <VideoDesc key={id}> {client.clientName} </VideoDesc>
 					  })
 					: null}
-				<Player video={video} />
-				<MoreBy video={video} />
+				
 				{video.description ? <About video={video} /> : null}
+				
 			</VideoInnerWrapper>
+			<MoreBy video={video} />
 		</VideoOuterWrapper>
+	</>
 	)
 }
 

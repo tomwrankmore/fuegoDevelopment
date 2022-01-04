@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaVimeoV, FaInstagram } from "react-icons/fa";
 import gsap from "gsap";
+import colors from '../../style-variables/colors'
 
 import { FaBeer } from 'react-icons/fa';
 
@@ -42,7 +43,7 @@ const OverlayWrapper = styled.div`
     }
     .overlay-layer {
         position: relative;
-        background-color: #121212;
+        background-color: ${colors.navOverlayBG};
         height: 100%;
         width: 100%;
         overflow: hidden;

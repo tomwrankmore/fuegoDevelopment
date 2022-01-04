@@ -2,12 +2,21 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import sanityClient from '../../Client'
 
+const StyledFooter = styled.footer`
+    background: white;
+    position: fixed;
+    z-index: -1;
+    width: 100vw;
+    text-align: center;
+    bottom: 0;
+    padding: 1rem 0;
+`
+
 const FooterDesc = styled.p`
-  position: relative;
-  bottom: 0;
-  font-size: 10px;
-  width: 100%;
-  text-align: center;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+    color: black;
   `
 
 const Footer = () => {
@@ -26,8 +35,9 @@ setFooter(footer)
 }, [])
 
     return (
-       
+       <StyledFooter>
         <FooterDesc>{footer.companyInfo}</FooterDesc>
+       </StyledFooter>
     )
 }
 

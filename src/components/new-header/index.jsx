@@ -16,22 +16,23 @@ const StyledHeader = styled.header`
     position: fixed;
     width: 100%;
     z-index: 100;
-    .innerHeader {
-        height: 100%;
-        width: 100%;
-        background: transparent;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 10;
-        color: #fff;
-        padding: 0 1rem;
-    }
 `;
+
+const InnerHeader = styled.div`
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    color: #fff;
+    padding: 0 1rem;
+`
 
 const StyledButton = styled.button`
     border: none;
@@ -54,6 +55,10 @@ const LogoContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 `
 
 const LogoLink = styled(Link)`
@@ -140,11 +145,9 @@ const HeaderComp = ({ history }) => {
 		return
 	}, [])
 
-    console.log('HEADER header: ', header)
-
     return (
         <StyledHeader>
-            <div className="innerHeader">
+            <InnerHeader className='innerHeader'>
                 <LogoContainer>
                     <LogoLink to="/">
                         <LogoImg
@@ -162,7 +165,7 @@ const HeaderComp = ({ history }) => {
                 <StyledButton disabled={disabled} className="menu" onClick={handleMenu}>
                     {menuState.menuIcon}
                 </StyledButton>
-            </div>
+            </InnerHeader>
             <NavOverlay menuState={menuState} handleMenu={handleMenu} />
         </StyledHeader>
     );

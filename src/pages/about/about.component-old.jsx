@@ -13,9 +13,8 @@ const AboutWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100%;
-    width: 100%;
-    min-height: 100vh;
+	height: auto;
+	width: 100%;
 `
 
 const AboutHeader = styled.h1`
@@ -25,17 +24,13 @@ const AboutHeader = styled.h1`
 	}
 `
 
-const AboutText = styled.div`
-	
-`
-
 const AboutSection = styled.div`
   margin-top: 10px;
   display: flex;
   position: relative;
   justify-content: center;
   align-items: center;
-  flex-flow: column;
+  flex-flow: column
   width: 100%;
   @media screen and (max-width: 1000px) {
     margin-top: 5px;
@@ -49,8 +44,7 @@ const AboutDescContainer = styled.div`
 		width: 100%;
 
 		h2 {
-			font-size: 20px; 
-			@media screen and (max-width: 1000px) {
+			font-size: 20px @media screen and (max-width: 1000px) {
 				font-size: 16px;
 			}
 		}
@@ -168,50 +162,7 @@ const About = () => {
 		<AboutWrapper>
 			<Container>
 				<AboutHeader>{about.header}</AboutHeader>
-				<h2 style={{ margin: '0' }}>{about.descHeader}</h2>
-				<AboutText>
-				<p>Founded by Charlie Rees, Edd Roberts and George Harper. Fuego Films is a production house based in London. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At adipisci, doloremque, laborum tempore magnam odio perspiciatis provident, itaque ratione quibusdam harum. Sint tenetur dolorum alias quia vitae aliquid ut officiis.</p>
 
-				<p>We offer full services for advertising and commercial production, from creative treatment to physical production to post-production and finishing. If you are interested in working together, please get in touch with us at:</p>
-				</AboutText>
-				
-				<Link href={`mailto:${about.email}`}>
-					<Details>{about.email}</Details>
-				</Link>
-				{/* <p>Or if you'd prefer to give us a call, we can be reached on:</p>
-				<Link href={`tel:${about.phone}`}>
-					<Details>{about.phone}</Details>
-				</Link> */}
-				<ContactDetails>
-							<DetailHeader>Get in touch with us:</DetailHeader>
-							<LinkContainer>
-								<div>
-									<Link href={`mailto:${about.email}`}>
-										<Details>{about.email}</Details>
-									</Link>
-									<Link href={`tel:${about.phone}`}>
-										<Details>{about.phone}</Details>
-									</Link>
-								</div>
-								<div>
-									<Link href="https://www.instagram.com/fuegofilmsldn/">
-										<VideoLinks
-											alt="instagram Logo"
-											src={urlFor(about.instagram).url()}
-										/>
-									</Link>
-									<Link href="https://vimeo.com/fuegofilmsltd">
-										<VideoLinks
-											alt="vimeo Logo"
-											src={urlFor(about.vimeo).url()}
-										/>
-									</Link>
-								</div>
-							</LinkContainer>
-						</ContactDetails>
-
-
-				OLD
 				<AboutSection>
 					<AboutDescContainer>
 						<h2 style={{ margin: '0' }}>{about.descHeader}</h2>
@@ -251,6 +202,7 @@ const About = () => {
 						<ShowreelCont />
 					</ShowreelContainer>
 				</AboutSection>
+				{/* <Footer /> */}
 			</Container>
 		</AboutWrapper>
 	)
