@@ -74,7 +74,7 @@ const Directors = () => {
 	return (
         <DirectorsContainer>
             {/* <PageTitle>Directors</PageTitle> */}
-            <DirectorsDescription>Copy to describe the list of Directors for page context. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit, quas saepe vero voluptates perferendis ipsa, quae, ducimus illum molestias error quos enim. Temporibus omnis id, voluptatum recusandae repellat obcaecati nemo.</DirectorsDescription>
+            {/* <DirectorsDescription>Copy to describe the list of Directors for page context. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit, quas saepe vero voluptates perferendis ipsa, quae, ducimus illum molestias error quos enim. Temporibus omnis id, voluptatum recusandae repellat obcaecati nemo.</DirectorsDescription> */}
             <DirectorsList ref={dRef}>
                 {directorData.map((director, idx) => {
                     return (
