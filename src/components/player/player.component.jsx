@@ -20,6 +20,7 @@ const VideoContainer = styled.div`
 	} */
 `
 const Player = ({ video }) => {
+	console.log('video video', video.vimeoLink)
 	return (
 		<VideoContainer>
 			{/* <iframe
@@ -27,8 +28,9 @@ const Player = ({ video }) => {
 				frameBorder="0"
 				allow="autoplay"
 				src={`https://player.vimeo.com/video/${video.vimeoLink}?color=9f00ef&byline=0&portrait=0`}
-			></iframe>
-			<script src="https://player.vimeo.com/api/player.js"></script> */}
+			></iframe> 
+			 */}
+			<script src="https://player.vimeo.com/api/player.js"></script>
 			<ReactPlayer
 				className='react-player'
 				url={`https://vimeo.com/${video.vimeoLink}`}

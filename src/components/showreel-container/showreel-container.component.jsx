@@ -22,6 +22,8 @@ const ShowreelCont = () => {
 		})
 	}, [])
 
+	console.log('showreel showreel: ', showreel)
+
 	return (
 		<PlayCont style={{ marginBottom: '50px' }}>
 			<Player video={showreel} />

@@ -125,7 +125,7 @@ const Socials = styled.div`
     display: flex;
     align-content: center;
     justify-content: space-around;
-    border-top: dotted 1px #606060;
+    border-top: dotted 1px #181818;
     padding: 1rem 0;
     overflow: hidden;
 

@@ -1,7 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef, useEffect } from 'react'
 import styled from 'styled-components'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import VideoImage from '../../components/video-image/video-image.component'
 import { ContentContext } from '../../store/ContentContext'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const ContentContainer = styled.div`
 	width: 100%;
@@ -34,6 +38,7 @@ const VideoContainer = styled.div`
 const ImageContainer = styled.div`
 	width: 100%;
 	height: 250px;
+	visibility: hidden;
 	@media screen and (max-width: 1000px) {
 		height: 200px;
 		width: 90%;
@@ -76,8 +81,36 @@ const CatButton = styled.button`
 `
 
 const Content = () => {
-	const { category, videoArray, isFiltered, filter, clientCat, allArray } =
-		useContext(ContentContext)
+	const { category, videoArray, isFiltered, filter, clientCat, allArray } = useContext(ContentContext);
+
+	const revealRefs = useRef([]);
+	revealRefs.current = [];
+
+	const addToRefs = (el) => {
+		if(el && !revealRefs.current.includes(el)) {
+			revealRefs.current.push(el)
+		}
+	};
+
+	const workItems = revealRefs.current;
+
+	useEffect(() => {
+		gsap.set(workItems, { yPercent: 50, visibility: 'hidden' })
+		setTimeout(() => {
+			ScrollTrigger.batch(workItems, {
+				start: 'top 85%',
+				onEnter: batch => gsap.to(batch, { 
+					ease: 'power4.inOut', 
+					autoAlpha: 1, 
+					yPercent: 0, 
+					duration: 0.5,
+					stagger: { 
+						each: 0.075, 
+						grid: [1, 3] }, 
+					overwrite: true })
+			})
+			}, 450)
+	}, [workItems])
 
 	return (
 		<ContentContainer>
@@ -99,7 +132,7 @@ const Content = () => {
 			{isFiltered ? (
 				<VideoContainer>
 					{videoArray.map((contentVid, id) => (
-						<ImageContainer key={id}>
+						<ImageContainer key={id} ref={addToRefs}>
 							<VideoImage
 								clientCat={clientCat}
 								filtered={true}
@@ -111,7 +144,7 @@ const Content = () => {
 			) : (
 				<VideoContainer>
 					{videoArray.map((contentVid, id) => (
-						<ImageContainer key={id}>
+						<ImageContainer key={id} ref={addToRefs}>
 							<VideoImage filtered={false} video={contentVid} />
 						</ImageContainer>
 					))}
