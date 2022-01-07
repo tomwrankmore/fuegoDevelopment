@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import VideoImage from '../../components/video-image/video-image.component'
 import { ContentContext } from '../../store/ContentContext'
+import sizes from '../../style-variables/sizes'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -13,10 +14,13 @@ const ContentContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-flow: column;
-	margin-bottom: 50px;
+	padding-top: 120px;
 `
 const ContentTitle = styled.h1`
-	margin-top: 80px;
+	margin-top: 120px;
+	font-family: 'Inter',sans-serif;
+    font-weight: 800;
+	font-size: ${sizes.headingOne};
 	@media screen and (max-width: 1000px) {
 		font-size: 18px;
 	}
@@ -26,6 +30,7 @@ const VideoContainer = styled.div`
 	grid-template-columns: 1fr 1fr 1fr;
 	width: 100vw;
 	grid-gap: 0;
+	/* visibility: hidden; */
 	@media screen and (max-width: 1200px) {
 		grid-template-columns: 1fr 1fr;
 		width: 85%;
@@ -39,6 +44,7 @@ const ImageContainer = styled.div`
 	width: 100%;
 	height: 250px;
 	visibility: hidden;
+	position: relative;
 	@media screen and (max-width: 1000px) {
 		height: 200px;
 		width: 90%;
@@ -50,8 +56,9 @@ const CatCont = styled.div`
 	width: 85%;
 	height: auto;
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: center;
+	margin-bottom: 2rem;
 	@media screen and (max-width: 1000px) {
 		width: 85%;
 		display: grid;
@@ -62,9 +69,8 @@ const CatCont = styled.div`
 const CatButton = styled.button`
 	cursor: pointer;
 	border-radius: 20px;
-	background: rgba(230, 230, 255, 0.2);
-
-	color: rgba(0, 0, 0, 0.5);
+	background: rgb(230, 230, 255);
+	color: rgb(0, 0, 0);
 	padding: 5px 15px;
 	font-size: 12px;
 	border: none;
@@ -82,7 +88,7 @@ const CatButton = styled.button`
 
 const Content = () => {
 	const { category, videoArray, isFiltered, filter, clientCat, allArray } = useContext(ContentContext);
-
+	const videoContainerRef = useRef()
 	const revealRefs = useRef([]);
 	revealRefs.current = [];
 
@@ -95,23 +101,28 @@ const Content = () => {
 	const workItems = revealRefs.current;
 
 	useEffect(() => {
-		gsap.set(workItems, { yPercent: 50, visibility: 'hidden' })
+		gsap.defaults({ease: "back"});
+		gsap.set(workItems, { visibility: 'hidden', scale: 0.875 })
+		gsap.to(videoContainerRef.current, { autoAlpha:1 })
 		setTimeout(() => {
 			ScrollTrigger.batch(workItems, {
 				start: 'top 85%',
-				onEnter: batch => gsap.to(batch, { 
-					ease: 'power4.inOut', 
+				onEnter: batch => gsap.to(batch, {
 					autoAlpha: 1, 
-					yPercent: 0, 
-					duration: 0.5,
+					duration: 1,
+					scale: 1,
 					stagger: { 
 						each: 0.075, 
 						grid: [1, 3] }, 
-					overwrite: true })
+					overwrite: true 
+				}),
+				onLeave: batch => gsap.set(batch, { opacity: 0, scale: 0.875, overwrite: true }),
+				onEnterBack: batch => gsap.to(batch, {opacity: 1, scale: 1, stagger: 0.15, overwrite: true}),
+  				onLeaveBack: batch => gsap.to(batch, { opacity: 0, scale: 0.875, overwrite: true})
 			})
 			}, 450)
 	}, [workItems])
-
+	console.log('category category', category)
 	return (
 		<ContentContainer>
 			<ContentTitle>Share The Vision.</ContentTitle>
@@ -130,7 +141,7 @@ const Content = () => {
 				})}
 			</CatCont>
 			{isFiltered ? (
-				<VideoContainer>
+				<VideoContainer ref={videoContainerRef}>
 					{videoArray.map((contentVid, id) => (
 						<ImageContainer key={id} ref={addToRefs}>
 							<VideoImage

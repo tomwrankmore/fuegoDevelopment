@@ -1,7 +1,6 @@
-import React, { useContext, useRef, useState, useEffect } from 'react'
+import React, { useContext, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import colors from '../../style-variables/colors'
 import { DirectorsContext } from '../../store/DirectorsContext'
 import gsap from 'gsap'
 
@@ -14,19 +13,19 @@ const DirectorsContainer = styled.div`
     align-content: center;
 `
 
-const PageTitle = styled.h1`
-    text-align: center;
-    font-weight: bold;
-    font-size: clamp(1.5rem, 5vw, 8rem);
-    border: solid 1px ${colors.text};
-    padding: 2vh 2vw;
-    box-shadow: 0px 0px 15px 5px #000000;
-    `
+// const PageTitle = styled.h1`
+//     text-align: center;
+//     font-weight: bold;
+//     font-size: clamp(1.5rem, 5vw, 8rem);
+//     border: solid 1px ${colors.text};
+//     padding: 2vh 2vw;
+//     box-shadow: 0px 0px 15px 5px #000000;
+//     `
 
-const DirectorsDescription = styled.p`
-    max-width: 50vw;
-    margin-bottom: 2rem;
-`
+// const DirectorsDescription = styled.p`
+//     max-width: 50vw;
+//     margin-bottom: 2rem;
+// `
 
 const DirectorsList = styled.ul`
     margin: 0;

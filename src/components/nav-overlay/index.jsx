@@ -5,8 +5,6 @@ import { FaVimeoV, FaInstagram } from "react-icons/fa";
 import gsap from "gsap";
 import colors from '../../style-variables/colors'
 
-import { FaBeer } from 'react-icons/fa';
-
 import {
     fadeInUp,
     handleHover,
@@ -125,7 +123,7 @@ const Socials = styled.div`
     display: flex;
     align-content: center;
     justify-content: space-around;
-    border-top: dotted 1px #181818;
+    border-top: dotted 1px #606060;
     padding: 1rem 0;
     overflow: hidden;
 

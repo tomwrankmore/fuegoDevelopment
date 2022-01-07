@@ -18,7 +18,8 @@ import HomeContextProvider from './store/HomeContext';
 const OuterContainer = styled.div` 
     background-color: ${colors.background};
     color: ${colors.text};
-    font-family: 'Source Sans Pro', sans-serif;
+    /* font-family: 'Source Sans Pro', sans-serif; */
+    font-family: 'Inter',sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin-bottom: 45px;

@@ -24,9 +24,6 @@ const VideoInnerWrapper = styled.div`
 	min-height: 100vh;
 `
 
-const VideoWrapper = styled.div` 
-`
-
 const VideoTitle = styled.h2`
 	margin: 5px 0 0 0;
 	@media screen and (max-width: 1000px) {
