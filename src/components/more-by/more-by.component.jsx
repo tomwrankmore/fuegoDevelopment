@@ -17,7 +17,7 @@ const MoreByP = styled.p`
 
 const MoreBy = ({ video }) => {
 	return (
-		<MoreByCont>
+		<MoreByCont className='moreByCont'>
 			{video.clientWork ? (
 				<div>
 					{video.client.map((client, id) => {

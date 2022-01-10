@@ -5,6 +5,9 @@ import ReactPlayer from 'react-player'
 // import ShowreelCont from '../../components/showreel-container/showreel-container.component'
 import imageUrlBuilder from '@sanity/image-url'
 import colors from '../../style-variables/colors'
+import sizes from '../../style-variables/sizes'
+import { device } from '../../style-variables/mediaQueries'
+import { divide } from '../../style-variables/mediaQueries'
 import { gsap } from 'gsap'
 import { FaVimeoV, FaInstagram } from "react-icons/fa";
 
@@ -23,75 +26,58 @@ const PlayCont = styled.div`
 `
 
 const VideoContainer = styled.div`
-	min-width: 100%;
-	height: 75vh;
+	width: 100%;
+	height: 50vh;
+	@media ${device.mediaMinLarge} {
+		width: 100%;
+		height: 75vh;
+	}
 `
 
 const AboutWrapper = styled.div`
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
     width: 100%;
     min-height: 100vh;
 	padding: 0 5vw;
-	
+	@media ${device.mediaMinLarge} {
+		flex-direction: row;
+	}
+
+	p.description, a.emailLink {
+		text-align: center;
+		@media ${device.mediaMinLarge} {
+			text-align: left;
+		}
+	}
 `
 
 const AboutHeader = styled.h1`
 	margin: 0;
     font-family: 'Inter',sans-serif;
     font-weight: 800;
-    font-size: 84px;
+    font-size: clamp(1rem,-.875rem + 6.333333vw,10rem);
+	text-align: center;
 	span {
 		display: block;
 	}
+	@media ${device.mediaMinLarge} {
+		text-align: left;
+	}
 `
-
-const AboutText = styled.div`
-	
-`
-
-// const AboutSection = styled.div`
-//   margin-top: 10px;
-//   display: flex;
-//   position: relative;
-//   justify-content: center;
-//   align-items: center;
-//   flex-flow: column;
-//   width: 100%;
-//   @media screen and (max-width: 1000px) {
-//     margin-top: 5px;
-//   }`
-
-// const AboutDescContainer = styled.div`
-// 	text-align: left;
-// 	width: 90%;
-// 	@media screen and (max-width: 1000px) {
-// 		text-align: center;
-// 		width: 100%;
-
-// 		h2 {
-// 			font-size: 20px; 
-// 			@media screen and (max-width: 1000px) {
-// 				font-size: 16px;
-// 			}
-// 		}
-// 		p {
-// 			font-size: 14px;
-// 		}
-// 	}
-// `
 
 const DetailHeader = styled.p`
-	text-align: left;
-	font-size: 20px;
+	text-align: center;
+	font-size: 16px;
 	margin: 0;
-	@media screen and (max-width: 1000px) {
-		text-align: center;
-		font-size: 16px;
-	}
 	font-weight: bold;
+	@media ${device.mediaMinLarge} {
+		text-align: left;
+		font-size: 20px;
+	}
 `
 const Details = styled.p`
 	margin: 5px 0;
@@ -99,61 +85,36 @@ const Details = styled.p`
 	color: ${colors.text};
 `
 
-// const AboutTeamContainer = styled.div`
-// 	width: 100%;
-// 	display: flex;
-// 	justify-content: center;
-// 	flex-flow: row wrap;
-// 	margin-top: 0;
-// 	* {
-// 		padding: 0;
-// 		margin: 2px 0;
-// 		margin-right: 5px;
-// 	}
-
-// 	@media screen and (max-width: 1000px) {
-// 		justify-content: center;
-// 		p {
-// 			font-size: 12px;
-// 		}
-// 	}
-// `
-
 const ShowreelContainer = styled.div`
 	width: 100%;
-	margin-top: 2%;
 	overflow: hidden;
 	flex: 1;
-	padding-left: 1rem;
+	@media ${device.mediaMinLarge} {
+		width: 50%;
+		padding-left: 1rem;
+	}
+		
 `
 
 const ContactDetails = styled.div`
 	margin-top: 2rem;
 	font-size: 16px;
-	@media screen and (max-width: 1000px) {
-		margin-left: 10%;
-		width: 80%;
-	}
 `
 const Link = styled.a`
 	text-decoration: none;
 	color: ${colors.text};
 `
-// const VideoLinks = styled.img`
-// 	width: 35px;
-// 	margin: 5px;
-// 	@media screen and (max-width: 1000px) {
-// 		width: 25px;
-// 	}
-// `
 
 const Socials = styled.div`
     display: flex;
     align-content: center;
-    justify-content: flex-start;
+    justify-content: center;
     padding: 1rem 0;
     overflow: hidden;
 	gap: 1rem;
+	@media ${device.mediaMinLarge} {
+		justify-content: flex-start;
+	}
 
     a {
         font-size: 2rem;
@@ -168,7 +129,7 @@ const LinkContainer = styled.div`
 	justify-content: space-between;
 	align-items: center;
 
-	@media screen and (max-width: 1000px) {
+	@media ${device.mediaMaxLarge} {
 		justify-content: space-between;
 		align-items: center;
 		flex-flow: row;
@@ -176,8 +137,15 @@ const LinkContainer = styled.div`
 		text-align: left;
 	}
 `
-const Container = styled.div`
+const TextContainer = styled.div`
 	flex: 1;
+	width: 100%;
+	padding-top: 15vh;
+	@media ${device.mediaMinLarge} {
+		width: 50%;
+		margin: 0;
+		padding-top: 0;
+	}
 `
 
 const About = () => {
@@ -233,26 +201,18 @@ const About = () => {
 	}, [])
 
 	return (
-		<AboutWrapper>
-			<Container>
-				{/* <AboutHeader>{about.header}</AboutHeader> */}
+		<AboutWrapper className='aboutWrapper'>
+			<TextContainer>
 				<AboutHeader>
 					<span ref={addToRefs}>Conceptualise.</span>
 					<span ref={addToRefs}>Visualise.</span>
 					<span ref={addToRefs}>Create.</span>
 				</AboutHeader>
-				<h2 style={{ margin: '0' }}>{about.descHeader}</h2>
-				<AboutText ref={addToRefs}>
-					<p>Founded by Charlie Rees, Edd Roberts and George Harper</p>
-				</AboutText>
-				
-				{/* <p>Or if you'd prefer to give us a call, we can be reached on:</p>
-				<Link href={`tel:${about.phone}`}>
-					<Details>{about.phone}</Details>
-				</Link> */}
+					<h2 style={{ margin: '0' }}>{about.descHeader}</h2>
+					<p ref={addToRefs} className='description'>Founded by Charlie Rees, Edd Roberts and George Harper</p>
 				<ContactDetails ref={addToRefs}>
 					<DetailHeader>Get in touch:</DetailHeader>
-					<Link href={`mailto:hello@fuegofilms.co.uk`}>
+					<Link href={`mailto:hello@fuegofilms.co.uk`} className='emailLink'>
 						<Details>hello@fuegofilms.co.uk</Details>
 					</Link>
 					<Socials>
@@ -265,7 +225,7 @@ const About = () => {
 					</Socials>
 					
 				</ContactDetails>
-			</Container>
+			</TextContainer>
 			<ShowreelContainer ref={showReelRef}>
 				<script src="https://player.vimeo.com/api/player.js"></script>
 				<PlayCont>

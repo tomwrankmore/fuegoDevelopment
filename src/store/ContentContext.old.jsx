@@ -10,7 +10,7 @@ const ContentContextProvider = props => {
 	const [isFiltered, setIsFiltered] = useState(false)
 	const [clientCat, setClientCat] = useState(false)
 	const [clientArray, setClientArray] = useState([])
-	const videoQuery = `*[_type == "video"][!(_id in path('drafts.**'))] | order(date desc){
+	const videoQuery = `*[_type == "video"] | order(date desc){
 		_id, clientWork, title, thumbnail, client[]->{clientName, _id, logo}, categories[]->{category, _id}}
 		`
 	const catQuery = `*[_type == "categories"] | order(date desc){
@@ -28,9 +28,9 @@ const ContentContextProvider = props => {
 		})
 		return
 	}, [catQuery])
-	// console.log(clientArray)
+	console.log(clientArray)
 	useEffect(() => {
-		// console.log('fetching content')
+		console.log('fetching content')
 		sanityClient.fetch(videoQuery).then(video => {
 			const videoArray = []
 			const allArray = []

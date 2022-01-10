@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import VideoImage from '../../components/video-image/video-image.component'
 import { ContentContext } from '../../store/ContentContext'
 import sizes from '../../style-variables/sizes'
+import { device } from '../../style-variables/mediaQueries'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -21,34 +22,31 @@ const ContentTitle = styled.h1`
 	font-family: 'Inter',sans-serif;
     font-weight: 800;
 	font-size: ${sizes.headingOne};
-	@media screen and (max-width: 1000px) {
-		font-size: 18px;
-	}
 `
 const VideoContainer = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr;
 	width: 100vw;
-	grid-gap: 0;
-	/* visibility: hidden; */
-	@media screen and (max-width: 1200px) {
-		grid-template-columns: 1fr 1fr;
-		width: 85%;
+	grid-gap: 2rem;
+	padding: 0 2rem;
+	@media ${device.mediaMinSmall} {
+		grid-template-columns: repeat( auto-fit, minmax(450px, 1fr) );
 	}
-	@media screen and (max-width: 1000px) {
-		grid-template-columns: 1fr;
-		width: 95%;
+	@media ${device.mediaMinLarge} {
+		grid-gap: 0;
+		padding: 0;
 	}
 `
 const ImageContainer = styled.div`
 	width: 100%;
-	height: 250px;
+	height: 150px;
 	visibility: hidden;
 	position: relative;
-	@media screen and (max-width: 1000px) {
-		height: 200px;
-		width: 90%;
-		margin-left: 5%;
+	@media ${device.mediaMinSmall} {
+		height: 350px;
+	}
+	@media ${device.mediaMinLarge} {
+		height: 250px;
 	}
 `
 
@@ -59,20 +57,15 @@ const CatCont = styled.div`
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 2rem;
-	@media screen and (max-width: 1000px) {
-		width: 85%;
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-		margin-bottom: 5px;
-	}
 `
 const CatButton = styled.button`
 	cursor: pointer;
 	border-radius: 20px;
+	max-width: 10rem;
+	flex: 1 1 0;
 	background: rgb(230, 230, 255);
 	color: rgb(0, 0, 0);
 	padding: 5px 15px;
-	font-size: 12px;
 	border: none;
 	margin: 2% 5px;
 	transition: all ease-in-out 0.2s;
@@ -80,14 +73,13 @@ const CatButton = styled.button`
 		background: #800020;
 		color: rgba(255, 255, 255, 0.8);
 	}
-	@media screen and (max-width: 1000px) {
-		font-size: 10px;
-		padding: 5px 5px;
+	@media ${device.mediaMinLarge} {
 	}
 `
 
 const Content = () => {
-	const { category, videoArray, isFiltered, filter, clientCat, allArray } = useContext(ContentContext);
+	const { category, videoArray, isFiltered, filter, clientCat } =
+		useContext(ContentContext)
 	const videoContainerRef = useRef()
 	const revealRefs = useRef([]);
 	revealRefs.current = [];
@@ -122,7 +114,6 @@ const Content = () => {
 			})
 			}, 450)
 	}, [workItems])
-	console.log('category category', category)
 	return (
 		<ContentContainer>
 			<ContentTitle>Share The Vision.</ContentTitle>

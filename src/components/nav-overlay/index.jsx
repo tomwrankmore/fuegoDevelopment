@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaVimeoV, FaInstagram } from "react-icons/fa";
 import gsap from "gsap";
+import { device } from '../../style-variables/mediaQueries'
 import colors from '../../style-variables/colors'
 
 import {
@@ -58,8 +59,11 @@ const OverlayWrapper = styled.div`
 `;
 
 const Nav = styled.nav`
-    width: 50%;
+    width: 100%;
     display: block;
+    @media ${device.mediaMinLarge} {
+        width: 50%;
+    }
 `;
 
 const NavigationList = styled.ul`
@@ -105,9 +109,12 @@ const Wrapper = styled.div`
 
 const Info = styled.div`
     color: #fff;
-    width: 50%;
+    width: 100%;
     padding: 1rem 0;
     text-align: center;
+    @media ${device.mediaMinLarge} {
+        width: 50%;
+    }
     h3 {
         font-size: 1.2rem;
         margin: 0 auto 8px auto;
@@ -119,13 +126,16 @@ const Info = styled.div`
 `;
 
 const Socials = styled.div`
-    width: 50%;
+    width: 100%;
     display: flex;
     align-content: center;
     justify-content: space-around;
     border-top: dotted 1px #606060;
     padding: 1rem 0;
     overflow: hidden;
+    @media ${device.mediaMinLarge} {
+        width: 50%;
+    }
 
     a {
         font-size: 4rem;

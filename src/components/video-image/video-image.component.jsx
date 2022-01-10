@@ -25,11 +25,6 @@ const VideoLink = styled(Link)`
 	text-decoration: none;
 	position: relative;
 	display: block;
-	position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
 `
 
 const VideoTextContainer = styled.div`

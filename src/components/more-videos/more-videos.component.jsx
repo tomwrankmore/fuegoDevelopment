@@ -6,10 +6,10 @@ import { ContentContext } from '../../store/ContentContext'
 
 const VideoContainer = styled.div`
 	display: grid;
-	grid-template-columns: repeat( auto-fit, minmax(450px, 1fr) );;
+	grid-template-columns: repeat( auto-fit, minmax(450px, 1fr) );
 	width: 100%;
 	grid-gap: 0;
-	/* @media screen and (max-width: 1200px) {
+	@media screen and (max-width: 1200px) {
 		grid-template-columns: 1fr 1fr;
 		width: 100%;
 	}
@@ -17,7 +17,7 @@ const VideoContainer = styled.div`
 		grid-template-columns: 1fr;
 		width: 90%;
 		margin-left: 5%;
-	} */
+	}
 `
 const ImageContainer = styled.div`
 	width: 100%;
