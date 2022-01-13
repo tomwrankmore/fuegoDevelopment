@@ -26,12 +26,12 @@ const InnerHeader = styled.div`
     justify-content: flex-end;
     align-items: center;
     position: relative;
-    top: 0;
+    top: .75rem;
     left: 0;
     right: 0;
     z-index: 10;
     color: #fff;
-    padding: 0 1rem;
+    padding: 0 2rem;
 `
 
 const StyledButton = styled.button`

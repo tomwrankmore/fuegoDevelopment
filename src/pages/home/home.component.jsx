@@ -14,6 +14,8 @@ const HomeContainer = styled.div`
 	margin: 0 auto;
 	display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: .75rem;
+    padding: .75rem;
 `
 
 const VideoWrapper = styled.div`

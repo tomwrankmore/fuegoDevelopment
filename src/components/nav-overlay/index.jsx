@@ -141,6 +141,10 @@ const Socials = styled.div`
         font-size: 4rem;
         color: white;
         display: block;
+        transition: color .2s ease-in-out;
+        &:hover {
+            color: #adaaaa;
+        }
     }
 `;
 
