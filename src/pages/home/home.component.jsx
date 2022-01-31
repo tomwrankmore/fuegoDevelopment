@@ -82,10 +82,11 @@ const Description = styled.div`
 
 const Home = () => {
 	const { homeData } = useContext(HomeContext)
-
+    
 	return (
 		<HomeContainer>
 			{homeData.map((homeContent, idx) => {
+                console.log(`${homeContent.thumbnail}?h=200`)
                 // These classes are coming from Sanity CMS.
                 const sizeClass = classNames({
                     'small': homeContent.videoSize === 'small',
@@ -102,7 +103,7 @@ const Home = () => {
                             <Link to={{
                                 pathname: `/content/${homeContent.projectTitle}`,
                             }}>
-                                <DirectorVideo muted='muted' loop='loop' playsInline autoPlay preload="none" poster={homeContent.thumbnail}>
+                                <DirectorVideo muted='muted' loop='loop' playsInline autoPlay preload="none" poster={`${homeContent.thumbnail}?auto=format&h=600&blur=50`}>
                                     <source src={homeContent.vidURL} />
                                 </DirectorVideo>
                             </Link>
