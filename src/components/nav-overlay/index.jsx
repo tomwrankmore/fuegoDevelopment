@@ -235,10 +235,10 @@ const NavOverlay = ({ menuState }) => {
                                 </p>
                             </Info>
                             <Socials ref={socialsRef}>
-                                <a href="https://vimeo.com/fuegofilmsltd" target='_blank'>
+                                <a href="https://vimeo.com/fuegofilmsltd" target='_blank' rel="noopener noreferrer">
                                     <FaVimeoV />
                                 </a>
-                                <a href="https://www.instagram.com/fuegofilmsldn/?hl=en" target='_blank'>
+                                <a href="https://www.instagram.com/fuegofilmsldn/?hl=en" target='_blank' rel="noopener noreferrer">
                                     <FaInstagram />
                                 </a>
                             </Socials>

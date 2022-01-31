@@ -79,7 +79,7 @@ const Directors = () => {
                     return (
                         <li key={idx}>
                             <Link to={{ pathname: `/directors/${director.slug.current}` }} className='d-item'>
-                                {director.directorName}
+                                {director.clientName}
                             </Link>
                         </li>
                     )

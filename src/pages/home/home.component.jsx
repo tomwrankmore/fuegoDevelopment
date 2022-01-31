@@ -86,16 +86,18 @@ const Home = () => {
 	return (
 		<HomeContainer>
 			{homeData.map((homeContent, idx) => {
+                // These classes are coming from Sanity CMS.
                 const sizeClass = classNames({
                     'small': homeContent.videoSize === 'small',
                     'medium': homeContent.videoSize === 'medium',
                     'large': homeContent.videoSize === 'large'
                 })
+                // Order is applied via grid style order 
                 return (
                         <VideoWrapper className={sizeClass} style={{order: homeContent.order}} key={idx}>
                             <Description>
                                 <h3>{homeContent.projectTitle}</h3>
-                                <p>{homeContent.directorName}</p>
+                                <p>{homeContent.clientName}</p>
                             </Description>
                             <Link to={{
                                 pathname: `/content/${homeContent.projectTitle}`,

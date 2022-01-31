@@ -79,7 +79,7 @@ const DirectorProfile = () => {
 
     useEffect(() => {
 		const directorQuery = `*[_type == "directors" && slug.current == "${id.director}"]{
-            directorName,
+            clientName,
             directorBio,
             "directorProfileImg": directorImg.asset->url,
             "video1URL": video1.asset->url,
@@ -93,7 +93,7 @@ const DirectorProfile = () => {
         return
     }, [id])
 
-    const mainVidRef = useRef()
+    // const mainVidRef = useRef()
     // const secondaryVidRef = useRef()
     // const directorProfileRef = useRef()
 
@@ -134,7 +134,7 @@ const DirectorProfile = () => {
                         </SecondaryVideo>
                         <DirectorBio ref={addToRefs}>
                             <ProfileImg src={data.directorProfileImg} alt="Director" />
-                            <h1>{data.directorName}</h1>
+                            <h1>{data.clientName}</h1>
                             <PortableText
                                 blocks={data.directorBio}
                             />

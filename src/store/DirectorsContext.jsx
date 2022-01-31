@@ -7,7 +7,7 @@ const DirectorsContextProvider = props => {
 	useEffect(() => {
 		const directorQuery = `
 		*[_type == "directors"] {
-            directorName,
+            clientName,
 			slug,
         }
        `

@@ -4,11 +4,12 @@ export const HomeContext = createContext()
 
 const HomeContextProvider = props => {
 	const [homeData, setHome] = useState([])
+	
 	useEffect(() => {
 		const homeQuery = `
 		*[_type == "homePageContent"] | order(order asc){
             projectTitle,
-            directorName,
+            clientName,
 			order,
 			"vidURL": homePageVideoFile.asset->url,
 			videoSize,

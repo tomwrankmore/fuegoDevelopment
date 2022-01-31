@@ -3,11 +3,9 @@ import styled from 'styled-components'
 import sanityClient from '../../Client'
 import ReactPlayer from 'react-player'
 // import ShowreelCont from '../../components/showreel-container/showreel-container.component'
-import imageUrlBuilder from '@sanity/image-url'
+// import imageUrlBuilder from '@sanity/image-url'
 import colors from '../../style-variables/colors'
-import sizes from '../../style-variables/sizes'
 import { device } from '../../style-variables/mediaQueries'
-import { divide } from '../../style-variables/mediaQueries'
 import { gsap } from 'gsap'
 import { FaVimeoV, FaInstagram } from "react-icons/fa";
 
@@ -123,20 +121,6 @@ const Socials = styled.div`
     }
 `;
 
-const LinkContainer = styled.div`
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-
-	@media ${device.mediaMaxLarge} {
-		justify-content: space-between;
-		align-items: center;
-		flex-flow: row;
-		width: 100%;
-		text-align: left;
-	}
-`
 const TextContainer = styled.div`
 	flex: 1;
 	width: 100%;
@@ -198,7 +182,7 @@ const About = () => {
 			delay: 1.5,
 			duration: 2
 		})
-	}, [])
+	}, [aboutPageItems])
 
 	return (
 		<AboutWrapper className='aboutWrapper'>
