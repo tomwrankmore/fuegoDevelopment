@@ -103,7 +103,7 @@ const Home = () => {
                             <Link to={{
                                 pathname: `/content/${homeContent.projectTitle}`,
                             }}>
-                                <DirectorVideo muted='muted' loop='loop' playsInline autoPlay preload="none" poster={`${homeContent.thumbnail}?auto=format&h=600&blur=50`}>
+                                <DirectorVideo muted='muted' loop='loop' playsInline autoPlay poster={`${homeContent.thumbnail}?auto=format&h=600&blur=50`}>
                                     <source src={homeContent.vidURL} />
                                 </DirectorVideo>
                             </Link>

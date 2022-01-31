@@ -220,9 +220,9 @@ const NavOverlay = ({ menuState }) => {
                                     <li>
                                         <Link to="/content" onMouseEnter={e => handleHover(e)} onMouseOut={e => handleHoverExit(e)} ref={addToNavRefs}>Work</Link>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <Link to="/directors" onMouseEnter={e => handleHover(e)} onMouseOut={e => handleHoverExit(e)} ref={addToNavRefs}>Directors</Link>
-                                    </li>
+                                    </li> */}
                                     <li>
                                         <Link to="/about" onMouseEnter={e => handleHover(e)} onMouseOut={e => handleHoverExit(e)} ref={addToNavRefs}>About</Link>
                                     </li>
