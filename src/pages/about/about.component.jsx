@@ -193,7 +193,10 @@ const About = () => {
 					<span ref={addToRefs}>Create.</span>
 				</AboutHeader>
 					<h2 style={{ margin: '0' }}>{about.descHeader}</h2>
-					<p ref={addToRefs} className='description'>Founded by Charlie Rees, Edd Roberts and George Harper</p>
+					<p ref={addToRefs} className='description'>
+						We are a multi-disciplined collective of filmmakers and innovators who place creativity and storytelling at the forefront of every commercial, music promo, fashion film and documentary that we bring to life. 
+						Founded and operated in London by Charlie Rees and George Harper.
+					</p>
 				<ContactDetails ref={addToRefs}>
 					<DetailHeader>Get in touch:</DetailHeader>
 					<Link href={`mailto:hello@fuegofilms.co.uk`} className='emailLink'>
@@ -216,7 +219,7 @@ const About = () => {
 					<VideoContainer>
 						<ReactPlayer
 							className='react-player'
-							url={`https://vimeo.com/384010762`}
+							url={`https://vimeo.com/672420491`}
 							width='100%'
 							height='100%'
 							controls={true}

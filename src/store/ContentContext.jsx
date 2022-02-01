@@ -28,7 +28,7 @@ const ContentContextProvider = props => {
 		})
 		return
 	}, [catQuery])
-	// console.log(clientArray)
+	// console.log('allArray: ', allArray)
 	useEffect(() => {
 		// console.log('fetching content')
 		sanityClient.fetch(videoQuery).then(video => {
@@ -69,6 +69,7 @@ const ContentContextProvider = props => {
 	}, [videoQuery])
 
 	let filteredVideos = []
+
 	function filter(cat) {
 		if (cat.toLowerCase() === 'all') {
 			setVideoArray(ogArray)
